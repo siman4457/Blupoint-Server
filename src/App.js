@@ -7,8 +7,9 @@ import {
 } from "react-router-dom";
 
 import './App.css';
-import SignedInNav from "./components/layouts/SignedInNav";
 import './App.sass';
+import SignedInNav from "./components/layouts/SignedInNav";
+import HardwareHealth from "./components/hardware/HardwareHealth"
 
 function App() {
   return (
@@ -16,9 +17,8 @@ function App() {
       <div className="App">
         <SignedInNav/>
         <Switch>
-          <Route path="/dashboard">
-            {/*<Dashboard />*/}
-          </Route>
+          {/*<Route path="/" exact component={Home} />*/}
+          <Route path="/hardwarehealth" exact component={HardwareHealth} />
         </Switch>
 
       </div>

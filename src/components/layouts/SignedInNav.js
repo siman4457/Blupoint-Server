@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 class SignedInNav extends Component {
     render() {
@@ -25,9 +26,9 @@ class SignedInNav extends Component {
                                Dashboard
                            </a>
 
-                           <a className="navbar-item">
+                           <Link to="/hardwarehealth" className="navbar-item">
                                Hardware Health
-                           </a>
+                           </Link>
 
                            <a className="navbar-item">
                                Configuration
