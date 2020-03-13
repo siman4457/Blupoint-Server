@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 
 let socket;
 
@@ -12,13 +12,20 @@ const Dashboard = ({ location }) => {
     //Runs when the component renders
     const { user } = queryString.parse(location.search);
 
-    socket = io(ENDPOINT);
+    // socket = io(ENDPOINT);
 
     setUser(user);
 
-    console.log("user:", user);
-    console.log("socket:", socket);
+    // socket.emit("get_location_data", { user });
+
+    //complete useEffect with a return. This happens on unmounting of this component.
+    // return () => {
+    //   socket.emit("disconnect");
+
+    //   socket.off(); //This turns off a specific instance of the socket.
+    // };
   }, [ENDPOINT, location.search]);
+
   return (
     <div>
       <h1>Dashboard</h1>
