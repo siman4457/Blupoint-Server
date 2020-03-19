@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 // import io from "socket.io-client";
-import AddSensorModal from "./AddSensorModal";
+import FormModal from "./FormModal";
 import UseModal from "./UseModal";
 import Sensors from "../sensors/Sensors";
 
@@ -9,12 +9,17 @@ import Sensors from "../sensors/Sensors";
 const Config = location => {
   const ENDPOINT = "localhost:5000";
   const [user, setUser] = useState("");
-  const { isShowing, toggle_modal } = UseModal();
+  const [modalType, setType] = useState("");
+
+  const { isShowing, toggle_modal } = UseModal(modalType);
 
   //Runs when the component renders
   useEffect(() => {
     const { user } = queryString.parse(location.search); //Parse user from url
     setUser(user);
+
+    const type = ""
+    setType(type);
 
     // socket = io(ENDPOINT);
 
@@ -31,14 +36,30 @@ const Config = location => {
       <div className="columns">
         <div className="column"></div>
         <div className="column is-one-third is-centered">
+          <FormModal show={isShowing} hide={toggle_modal} type={modalType} />
+
           <span className="button is-success" onClick={toggle_modal}>
             Add a new sensor
           </span>
-          <AddSensorModal show={isShowing} hide={toggle_modal} />
+
           <br />
-          <span className="button is-success" onClick={toggle_modal}>
+
+          {/* <span className="button is-success" onClick={toggle_modal}>
             Remove a sensor
           </span>
+          <br /> */}
+
+
+          <span className="button is-success" onClick={toggle_modal}>
+            Add an ID card
+          </span>
+          <br />
+
+
+          {/* <span className="button is-success" onClick={toggle_modal}>
+            Remove an ID card
+          </span>
+          <br /> */}
 
           <Sensors />
         </div>

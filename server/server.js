@@ -34,7 +34,7 @@ app.post("/api/create_sensor", (req, res) => {
   const { sensorName } = req.body;
   const { macAddress } = req.body;
   console.log(req.body);
-  res.send("response from the database");
+  // res.send("response from the database");
 
 });
 
