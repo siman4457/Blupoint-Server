@@ -37,6 +37,36 @@ app.post("/api/create_sensor", (req, res) => {
   // res.send("response from the database");
 
 });
+app.post("/api/remove_sensor", (req, res) => {
+  console.log("----------Removing Sensor---------------");
+
+  const { sensorName } = req.body;
+  const { macAddress } = req.body;
+  console.log(req.body);
+  // res.send("response from the database");
+
+});
+
+
+app.post("/api/create_id_card", (req, res) => {
+  console.log("----------Creating ID Card---------------");
+
+  const { sensorName } = req.body;
+  const { macAddress } = req.body;
+  console.log(req.body);
+  // res.send("response from the database");
+
+});
+app.post("/api/remove_id_card", (req, res) => {
+  console.log("----------Removing ID Card---------------");
+
+  const { sensorName } = req.body;
+  const { macAddress } = req.body;
+  console.log(req.body);
+  // res.send("response from the database");
+
+});
+
 
 
 
