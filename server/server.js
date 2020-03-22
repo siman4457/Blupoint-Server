@@ -30,6 +30,8 @@ app.get("/api/get_sensors", (req, res) => {
 
 app.post("/api/create_sensor", (req, res) => {
   console.log("----------Creating Sensor---------------");
+  //Data received from the front end will be the following format:
+  // { sensorName: 'test', macAddress: 'test' }
 
   const { sensorName } = req.body;
   const { macAddress } = req.body;
@@ -39,6 +41,8 @@ app.post("/api/create_sensor", (req, res) => {
 });
 app.post("/api/remove_sensor", (req, res) => {
   console.log("----------Removing Sensor---------------");
+  //Data received from the front end will be the following format:
+  // { sensorName: 'test', macAddress: 'test' }
 
   const { sensorName } = req.body;
   const { macAddress } = req.body;
@@ -50,6 +54,8 @@ app.post("/api/remove_sensor", (req, res) => {
 
 app.post("/api/create_id_card", (req, res) => {
   console.log("----------Creating ID Card---------------");
+  //Data received from the front end will be the following format:
+  //{ employeeName: 'test', idCardNumber: 'test' }
 
   const { sensorName } = req.body;
   const { macAddress } = req.body;
@@ -59,6 +65,8 @@ app.post("/api/create_id_card", (req, res) => {
 });
 app.post("/api/remove_id_card", (req, res) => {
   console.log("----------Removing ID Card---------------");
+  //Data received from the front end will be the following format:
+  //{ employeeName: 'test', idCardNumber: 'test' }
 
   const { sensorName } = req.body;
   const { macAddress } = req.body;
