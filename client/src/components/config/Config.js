@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import "./config.css";
 import queryString from "query-string";
 // import io from "socket.io-client";
 // import FormModal from "./FormModal";
-import UseModal from "./UseModal";
-import Sensors from "../sensors/Sensors";
+// import UseModal from "./UseModal";
 import { Link } from "react-router-dom";
+import Sensors from "../hardware/Sensors";
+import Beacons from "../hardware/Beacons"
 
 // let socket;
 const Config = location => {
@@ -35,35 +37,27 @@ const Config = location => {
   return (
     <div className="container">
       <div className="columns">
-        <div className="column"></div>
-        <div className="column is-one-third is-centered">
-          <Link to="/addsensor" className="button is-success">
-            Add a new sensor
-          </Link>
-          <br />
-          <br />
-          <Link to="/removesensor" className="button is-success">
-            Remove a sensor
-          </Link>
-          <br />
-          <br />
+        <div className="column is-centered">
+          <div className="row-container">
+            <Link to="/addsensor" className="button lt-button config-control">
+              Add a new sensor
+           </Link>
 
-          <Link to="/addidcard" className="button is-success">
-            Add an ID card
-          </Link>
-          <br />
-          <br />
+            <Link to="/removesensor" className="button lt-button config-control">
+              Remove a sensor
+            </Link>
 
-          <Link to="/removeidcard" className="button is-success">
-            Remove an ID card
-          </Link>
-          <br />
-          <br />
+            <Link to="/addidcard" className="button lt-button config-control">
+              Add an ID card
+            </Link>
 
-          <h1>Current Sensors and ID Cards:</h1>
+            <Link to="/removeidcard" className="button lt-button config-control">
+              Remove an ID card
+            </Link>
+          </div>
           <Sensors />
+          <Beacons />
         </div>
-        <div className="column"></div>
       </div>
     </div>
   );

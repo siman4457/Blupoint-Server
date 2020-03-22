@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-class HardwareList extends Component {
+class SensorList extends Component {
   render() {
-    let beacons = [
+    let sensors = [
       {
         id: 1,
         room_name: "Meeting Room",
@@ -23,7 +23,7 @@ class HardwareList extends Component {
         <table className="table">
           <thead>
             <tr>
-              <th title="Beacon">Beacon #</th>
+              <th title="Sensor">Sensor ID</th>
               <th>Room</th>
               <th title="Health">Health</th>
               <th title="Status">Status</th>
@@ -31,15 +31,15 @@ class HardwareList extends Component {
             </tr>
           </thead>
           <tbody>
-            {beacons &&
-              beacons.map(beacon => {
+            {sensors &&
+              sensors.map(sensor => {
                 return (
-                  <tr key={beacon.id}>
-                    <th>{beacon.id}</th>
-                    <td>{beacon.room_name}</td>
-                    <td>{beacon.health}</td>
-                    <td>{beacon.status}</td>
-                    <td>{beacon.age}</td>
+                  <tr key={sensor.id}>
+                    <th>{sensor.id}</th>
+                    <td>{sensor.room_name}</td>
+                    <td>{sensor.health}</td>
+                    <td>{sensor.status}</td>
+                    <td>{sensor.age}</td>
                   </tr>
                 );
               })}
@@ -50,4 +50,4 @@ class HardwareList extends Component {
   }
 }
 
-export default HardwareList;
+export default SensorList;

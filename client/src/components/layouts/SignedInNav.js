@@ -8,8 +8,7 @@ class SignedInNav extends Component {
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <Link to={"/"} className="navbar-item">
-              {/*<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>*/}
-              <h2>Blupoint</h2>
+              <img className="nav-logo" src="./Icon.png" />
             </Link>
 
             {/* RESPONSIVE HAMBURGER MENU */}
@@ -30,10 +29,6 @@ class SignedInNav extends Component {
             <div className="navbar-start">
               <Link to="/" className="navbar-item">
                 Dashboard
-              </Link>
-
-              <Link to="/hardwarehealth" className="navbar-item">
-                Hardware Health
               </Link>
 
               <Link to="/config" className="navbar-item">

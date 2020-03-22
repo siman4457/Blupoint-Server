@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class SignedOutNav extends Component {
     render() {
@@ -7,14 +7,14 @@ class SignedOutNav extends Component {
                 <nav className="navbar" role="navigation" aria-label="main navigation">
                     <div className="navbar-brand">
                         <a className="navbar-item">
-                            <h1>Blupoint</h1>
+                            <img className="nav-logo" src="./Icon.png" />
                         </a>
 
                         <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false"
-                           data-target="navbarBasicExample">
-                            <span aria-hidden="true"/>
-                            <span aria-hidden="true"/>
-                            <span aria-hidden="true"/>
+                            data-target="navbarBasicExample">
+                            <span aria-hidden="true" />
+                            <span aria-hidden="true" />
+                            <span aria-hidden="true" />
                         </a>
                     </div>
 

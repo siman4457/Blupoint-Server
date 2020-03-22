@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import "./App.sass";
 import SignedInNav from "./components/layouts/SignedInNav";
-import HardwareHealth from "./components/hardware/HardwareHealth";
+import Sensors from "./components/hardware/Sensors";
 import Dashboard from "./components/dashboard/Dashboard";
 import Config from "./components/config/Config";
 import SignIn from "./components/layouts/SignIn";
@@ -21,7 +21,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Dashboard} />
           <Route path="/signin" component={SignIn} />
-          <Route path="/hardwarehealth" exact component={HardwareHealth} />
+
           <Route path="/config" exact component={Config} />
           <Route path="/addsensor" exact component={AddSensor} />
           <Route path="/removesensor" exact component={RemoveSensor} />

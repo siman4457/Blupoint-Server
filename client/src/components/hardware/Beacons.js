@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
-import HardwareList from "./HardwareList";
-// import 'bulma/css/bulma.css';
+import React, { Component } from 'react';
+import BeaconList from './BeaconList';
 
-class HardwareHealth extends Component {
+class Sensors extends Component {
     render() {
         return (
             <div>
@@ -10,7 +9,7 @@ class HardwareHealth extends Component {
                     <section className="section">
                         <div className="columns is-centered">
                             <div className="column is-narrow">
-                                <HardwareList/>
+                                <BeaconList />
                             </div>
                         </div>
                     </section>
@@ -21,4 +20,4 @@ class HardwareHealth extends Component {
     }
 }
 
-export default HardwareHealth;
+export default Sensors;
