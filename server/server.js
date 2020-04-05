@@ -118,12 +118,12 @@ app.listen(PORT, () => console.log(`listening on port ${PORT}`));
 //elasticsearch functions
 /*
 const { Client } = require('@elastic/elasticsearch')
-const client = new Client({ node: 'http://10.0.0.233:9200' })
+const esClient = new Client({ node: 'http://10.0.0.233:9200' })
 
 
 //queries for cards and sensors
 //_id for record id and _source for record fields
-const sensors = (await client.search({
+const sensors = (await esClient.search({
     index: 'blupoint_sensors',
     size: 10000,
     body: { 
@@ -133,7 +133,7 @@ const sensors = (await client.search({
     }
   })).body.hits.hits;
 
-const cards = (await client.search({
+const cards = (await esClient.search({
     index: 'blupoint_cards',
     size: 10000,
     body: { 
@@ -144,21 +144,21 @@ const cards = (await client.search({
   })).body.hits.hits;
 
 //insert card
-await client.index({
+await esClient.index({
     index: 'blupoint_cards',
     refresh: true,
     body: null //put js object here with needed fields
 })
 
 //insert sensor
-await client.index({
+await esClient.index({
     index: 'blupoint_sensors',
     refresh: true,
     body: null //put js object here with needed fields
 })
 
 //update sensor
-await client.update({
+await esClient.update({
     index: 'blupoint_sensors',
     refresh: true,
     id: null, //put _id from queried object here
@@ -166,7 +166,7 @@ await client.update({
 })
 
 //update card
-await client.update({
+await esClient.update({
     index: 'blupoint_cards',
     refresh: true,
     id: null, //put _id from queried object here
@@ -174,18 +174,35 @@ await client.update({
 })
 
 //delete sensor
-await client.delete({
+await esClient.delete({
     index: 'blupoint_sensors',
     refresh: true,
     id: null, //put _id from queried object here
 })
 
 //delete card
-await client.update({
+await esClient.update({
     index: 'blupoint_cards',
     refresh: true,
     id: null, //put _id from queried object here
 })
+
+
+//get most recents
+var currentPositions = await esClient.search({
+  "index": 'blupoint_history',
+  "query": {
+    "match_all": {}
+  },
+  "collapse": {
+    "field": "card",
+    "inner_hits": {
+      "name": "most_recent",
+      "size": 1,
+      "sort": [{"time": "desc"}]
+    }
+  }
+}).hits.hits
 */
 
 //sensor handler
@@ -248,7 +265,7 @@ function runLoc(){
         body: {
           card: card,
           sensor: max,
-          time: new Date()
+          time: (new Date()).getTime()
         }
       });
     }
