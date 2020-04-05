@@ -113,3 +113,147 @@ app.post("/api/remove_id_card", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+
+
+//elasticsearch functions
+/*
+const { Client } = require('@elastic/elasticsearch')
+const client = new Client({ node: 'http://10.0.0.233:9200' })
+
+
+//queries for cards and sensors
+//_id for record id and _source for record fields
+const sensors = (await client.search({
+    index: 'blupoint_sensors',
+    size: 10000,
+    body: { 
+        "query": {
+            "match_all": {}
+        } 
+    }
+  })).body.hits.hits;
+
+const cards = (await client.search({
+    index: 'blupoint_cards',
+    size: 10000,
+    body: { 
+        "query": {
+            "match_all": {}
+        } 
+    }
+  })).body.hits.hits;
+
+//insert card
+await client.index({
+    index: 'blupoint_cards',
+    refresh: true,
+    body: null //put js object here with needed fields
+})
+
+//insert sensor
+await client.index({
+    index: 'blupoint_sensors',
+    refresh: true,
+    body: null //put js object here with needed fields
+})
+
+//update sensor
+await client.update({
+    index: 'blupoint_sensors',
+    refresh: true,
+    id: null, //put _id from queried object here
+    body: null //put js object here with needed fields
+})
+
+//update card
+await client.update({
+    index: 'blupoint_cards',
+    refresh: true,
+    id: null, //put _id from queried object here
+    body: null //put js object here with needed fields
+})
+
+//delete sensor
+await client.delete({
+    index: 'blupoint_sensors',
+    refresh: true,
+    id: null, //put _id from queried object here
+})
+
+//delete card
+await client.update({
+    index: 'blupoint_cards',
+    refresh: true,
+    id: null, //put _id from queried object here
+})
+*/
+
+//sensor handler
+/*
+var io = require('socket.io')
+var server = io.listen(27015);
+
+var locations = {
+  1: [ 0, 0],
+  2: [10, 0],
+  3: [10,10]
+}
+
+var rssi = {
+  1: {},
+  2: {},
+  3: {}
+}
+
+server.on('connection', function (socket) {
+  //socket.on('indetify', function(from, msg) {
+  //  sensorLookup[from] = msg.id
+  //})
+  console.log('connection')
+
+  socket.on('location', function (from) {
+    rssi[from.id][from.card] = {
+      rssi: from.rssi, 
+      time: new Date() 
+    } 
+  })
+
+  socket.on('disconnect', function () {
+  })
+})
+
+function runLoc(){
+  var cards = [];
+  for (var n = 1; n < 4; n++) {
+    for (var i in Object.keys(rssi[n])) {
+      if (!(i in cards)) {
+        cards.push(Object.keys(rssi[n])[i])
+      }
+    }
+  }
+  for (var c in cards) {
+    var card = cards[c]
+    var max = null;
+    var maxV = null;
+    var currDate = new Date();
+    for (var s in rssi) {
+      if (rssi[s][card] && rssi[s][card]['time'] && (((currDate.getTime() - rssi[s][card]['time'].getTime())/1000) < 3) && (maxV == null || rssi[s][card]['rssi'] > maxV)) {
+        max = 3;
+        maxV = rssi[3][card]['rssi'];
+      }
+    }
+    if (max != null) {
+      await esClient.index({
+        index: 'blupoint_history',
+        body: {
+          card: card,
+          sensor: max,
+          time: new Date()
+        }
+      });
+    }
+  }
+  setTimeout(runLoc, 5000);
+}
+runLoc();
+*/
