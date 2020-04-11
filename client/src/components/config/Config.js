@@ -1,38 +1,40 @@
-import React, { useEffect, useState } from "react";
-import "./config.css";
-import queryString from "query-string";
+// import React, { useEffect, useState } from "react";
+
+// import queryString from "query-string";
 // import io from "socket.io-client";
 // import FormModal from "./FormModal";
 // import UseModal from "./UseModal";
+import React from 'react'
 import { Link } from "react-router-dom";
 import Sensors from "../hardware/Sensors";
 import Beacons from "../hardware/Beacons"
+import "./config.css";
 
 // let socket;
 const Config = location => {
-  const ENDPOINT = "localhost:5000";
-  const [user, setUser] = useState("");
-  const [modalType, setType] = useState("");
+  // const ENDPOINT = "localhost:5000";
+  // const [user, setUser] = useState("");
+  // const [modalType, setType] = useState("");
 
   // const { isShowing, toggle_modal } = UseModal(modalType);
 
   //Runs when the component renders
-  useEffect(() => {
-    const { user } = queryString.parse(location.search); //Parse user from url
-    setUser(user);
+  // useEffect(() => {
+  //   const { user } = queryString.parse(location.search); //Parse user from url
+  //   setUser(user);
 
-    const type = ""
-    setType(type);
+  //   const type = ""
+  //   setType(type);
 
-    // socket = io(ENDPOINT);
+  //   // socket = io(ENDPOINT);
 
-    //complete useEffect with a return. This happens on unmounting of this component.
-    // return () => {
-    //   socket.emit("disconnect");
+  //   //complete useEffect with a return. This happens on unmounting of this component.
+  //   // return () => {
+  //   //   socket.emit("disconnect");
 
-    //   socket.off(); //This turns off a specific instance of the socket.
-    // };
-  }, [ENDPOINT, location.search]);
+  //   //   socket.off(); //This turns off a specific instance of the socket.
+  //   // };
+  // }, [ENDPOINT, location.search]);
 
   return (
     <div className="container">

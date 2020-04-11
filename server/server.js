@@ -126,20 +126,20 @@ const esClient = new Client({ node: 'http://10.0.0.233:9200' })
 const sensors = (await esClient.search({
     index: 'blupoint_sensors',
     size: 10000,
-    body: { 
+    body: {
         "query": {
             "match_all": {}
-        } 
+        }
     }
   })).body.hits.hits;
 
 const cards = (await esClient.search({
     index: 'blupoint_cards',
     size: 10000,
-    body: { 
+    body: {
         "query": {
             "match_all": {}
-        } 
+        }
     }
   })).body.hits.hits;
 
@@ -230,9 +230,9 @@ server.on('connection', function (socket) {
 
   socket.on('location', function (from) {
     rssi[from.id][from.card] = {
-      rssi: from.rssi, 
-      time: new Date() 
-    } 
+      rssi: from.rssi,
+      time: new Date()
+    }
   })
 
   socket.on('disconnect', function () {
