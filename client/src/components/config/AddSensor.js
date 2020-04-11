@@ -6,7 +6,7 @@ export default class AddSensor extends Component {
         super(props);
         this.state = {
             sensorName: '',
-            macAddress: '',
+            sensorId: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,14 +25,14 @@ export default class AddSensor extends Component {
             },
             body: JSON.stringify({
                 sensorName: this.state.sensorName,
-                macAddress: this.state.macAddress
+                sensorId: this.state.sensorId
             }),
         }).then(res => res.json())
             .catch(err => {
                 console.log(err);
                 console.log(JSON.stringify({
                     sensorName: this.state.sensorName,
-                    macAddress: this.state.macAddress
+                    sensorId: this.state.sensorId
                 }));
             }
             );
@@ -82,8 +82,8 @@ export default class AddSensor extends Component {
                             <div className="field">
                                 <p className="control has-icons-left">
                                     <input
-                                        name="macAddress" className="input" type="text" placeholder="Enter mac address"
-                                        value={this.state.macAddress}
+                                        name="sensorId" className="input" type="text" placeholder="Enter mac address"
+                                        value={this.state.sensorId}
                                         onChange={this.handleChange}
                                     />
                                     <span className="icon is-small is-left">

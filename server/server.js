@@ -4,21 +4,14 @@ const path = require("path");
 // const history = require('connect-history-api-fallback');
 const bodyParser = require('body-parser');
 
-// const app = require("express")();
-// const server = require("http").Server(app);
-// const io = require("socket.io")(server);
+const { Client } = require('@elastic/elasticsearch')
+const esClient = new Client({ node: 'http://10.0.0.233:9200' })
 
-// const testAPIRouter = require("./routes/testAPI");
 
-// const router = require("./router");
-// app.use(router);
-// app.use(express.static(path.join(__dirname, "../client/public")));
-
-// app.use(history());
 app.use(express.static('dist'));
 app.use(bodyParser.json());
 
-// REST
+
 app.get("/api/get_sensors", (req, res) => {
   const sensors = [
     { id: 1, name: "sensor1", macAddress: "123456" },
@@ -33,21 +26,44 @@ app.post("/api/create_sensor", (req, res) => {
   //Data received from the front end will be the following format:
   // { sensorName: 'test', macAddress: 'test' }
 
-  const { sensorName } = req.body;
-  const { macAddress } = req.body;
-  console.log(req.body);
-  // res.send("response from the database");
+  // const { sensorName } = req.body;
+  // const { macAddress } = req.body;
+  // console.log(req.body);
+
+  //insert sensor
+  await esClient.index({
+    index: 'blupoint_sensors',
+    refresh: true,
+    body: req.body //put js object here with needed fields
+  })
+
+  return res.status(200).send({
+    message: `POST create_sensor succeeded`
+  })
 
 });
+
+
 app.post("/api/remove_sensor", (req, res) => {
   console.log("----------Removing Sensor---------------");
   //Data received from the front end will be the following format:
   // { sensorName: 'test', macAddress: 'test' }
 
-  const { sensorName } = req.body;
-  const { macAddress } = req.body;
+  // const { sensorName } = req.body;
+  // const { macAddress } = req.body;
+  const { sensorId } = req.body;
   console.log(req.body);
-  // res.send("response from the database");
+
+  //delete sensor
+  await esClient.delete({
+    index: 'blupoint_sensors',
+    refresh: true,
+    id: sensorId, //put _id from queried object here
+  })
+
+  return res.status(200).send({
+    message: `POST remove_sensor succeeded`
+  })
 
 });
 
@@ -57,10 +73,20 @@ app.post("/api/create_id_card", (req, res) => {
   //Data received from the front end will be the following format:
   //{ employeeName: 'test', idCardNumber: 'test' }
 
-  const { sensorName } = req.body;
-  const { macAddress } = req.body;
-  console.log(req.body);
-  // res.send("response from the database");
+  // const { sensorName } = req.body;
+  // const { macAddress } = req.body;
+  // console.log(req.body);
+
+  //insert card
+  await esClient.index({
+    index: 'blupoint_cards',
+    refresh: true,
+    body: req.body
+  })
+
+  return res.status(200).send({
+    message: `POST create_id_card succeeded`
+  })
 
 });
 app.post("/api/remove_id_card", (req, res) => {
@@ -68,10 +94,22 @@ app.post("/api/remove_id_card", (req, res) => {
   //Data received from the front end will be the following format:
   //{ employeeName: 'test', idCardNumber: 'test' }
 
-  const { sensorName } = req.body;
-  const { macAddress } = req.body;
+  // const { sensorName } = req.body;
+  // const { sensorId } = req.body;
+  const { idCardID } = req.body
   console.log(req.body);
-  // res.send("response from the database");
+
+  //delete card
+  await esClient.update({
+    index: 'blupoint_cards',
+    refresh: true,
+    id: idCardID, //put _id from queried object here
+  })
+
+
+  return res.status(200).send({
+    message: `POST remove_id_card succeeded`
+  })
 
 });
 
@@ -115,7 +153,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
 
 
-//elasticsearch functions
+//-----------------elasticsearch functions-----------------
 /*
 const { Client } = require('@elastic/elasticsearch')
 const esClient = new Client({ node: 'http://10.0.0.233:9200' })

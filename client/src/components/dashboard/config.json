@@ -2,17 +2,37 @@
     "buildings": [
         {
             "name": "Building 1",
+            "width": 300,
+            "height": 500,
             "rooms": [
                 {
                     "id": 1,
                     "name": "Kitchen",
+                    "width": 200,
+                    "height": 200,
+                    "sensors": [
+                        {
+                            "id": "dq231",
+                            "x": 70,
+                            "y": 90
+                        },
+                        {
+                            "id": "1sfd2",
+                            "x": 110,
+                            "y": 90
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "name": "Bathroom",
                     "width": 100,
                     "height": 100
                 },
                 {
-                    "id": 2,
+                    "id": 3,
                     "name": "Lobby",
-                    "width": 100,
+                    "width": 300,
                     "height": 100
                 }
             ]
