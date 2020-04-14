@@ -23,19 +23,18 @@ app.get("/api/get_sensors", (req, res) => {
 
 app.post("/api/create_sensor", (req, res) => {
   console.log("----------Creating Sensor---------------");
-  //Data received from the front end will be the following format:
-  // { sensorName: 'test', macAddress: 'test' }
 
-  // const { sensorName } = req.body;
-  // const { macAddress } = req.body;
-  // console.log(req.body);
+
+  const { sensorName } = req.body;
+  const { senseId } = req.body;
+  console.log(req.body)
 
   //insert sensor
-  await esClient.index({
-    index: 'blupoint_sensors',
-    refresh: true,
-    body: req.body //put js object here with needed fields
-  })
+  // await esClient.index({
+  //   index: 'blupoint_sensors',
+  //   refresh: true,
+  //   body: req.body //put js object here with needed fields
+  // })
 
   return res.status(200).send({
     message: `POST create_sensor succeeded`
@@ -46,20 +45,18 @@ app.post("/api/create_sensor", (req, res) => {
 
 app.post("/api/remove_sensor", (req, res) => {
   console.log("----------Removing Sensor---------------");
-  //Data received from the front end will be the following format:
-  // { sensorName: 'test', macAddress: 'test' }
 
   // const { sensorName } = req.body;
-  // const { macAddress } = req.body;
+
   const { sensorId } = req.body;
   console.log(req.body);
 
   //delete sensor
-  await esClient.delete({
-    index: 'blupoint_sensors',
-    refresh: true,
-    id: sensorId, //put _id from queried object here
-  })
+  // await esClient.delete({
+  //   index: 'blupoint_sensors',
+  //   refresh: true,
+  //   id: sensorId, //put _id from queried object here
+  // })
 
   return res.status(200).send({
     message: `POST remove_sensor succeeded`
@@ -70,19 +67,17 @@ app.post("/api/remove_sensor", (req, res) => {
 
 app.post("/api/create_id_card", (req, res) => {
   console.log("----------Creating ID Card---------------");
-  //Data received from the front end will be the following format:
-  //{ employeeName: 'test', idCardNumber: 'test' }
 
-  // const { sensorName } = req.body;
-  // const { macAddress } = req.body;
-  // console.log(req.body);
+  const { itemName } = req.body;
+  const { idCardID } = req.body;
+  console.log(req.body);
 
   //insert card
-  await esClient.index({
-    index: 'blupoint_cards',
-    refresh: true,
-    body: req.body
-  })
+  // await esClient.index({
+  //   index: 'blupoint_cards',
+  //   refresh: true,
+  //   body: req.body
+  // })
 
   return res.status(200).send({
     message: `POST create_id_card succeeded`
@@ -91,20 +86,16 @@ app.post("/api/create_id_card", (req, res) => {
 });
 app.post("/api/remove_id_card", (req, res) => {
   console.log("----------Removing ID Card---------------");
-  //Data received from the front end will be the following format:
-  //{ employeeName: 'test', idCardNumber: 'test' }
 
-  // const { sensorName } = req.body;
-  // const { sensorId } = req.body;
   const { idCardID } = req.body
   console.log(req.body);
 
   //delete card
-  await esClient.update({
-    index: 'blupoint_cards',
-    refresh: true,
-    id: idCardID, //put _id from queried object here
-  })
+  // await esClient.update({
+  //   index: 'blupoint_cards',
+  //   refresh: true,
+  //   id: idCardID, //put _id from queried object here
+  // })
 
 
   return res.status(200).send({

@@ -13,10 +13,6 @@ export default class AddSensor extends Component {
     }
 
     handleSubmit() {
-        console.log(JSON.stringify({
-            name: 'test'
-        }))
-
         fetch('/api/create_sensor', {
             method: 'POST',
             headers: {
@@ -82,7 +78,7 @@ export default class AddSensor extends Component {
                             <div className="field">
                                 <p className="control has-icons-left">
                                     <input
-                                        name="sensorId" className="input" type="text" placeholder="Enter mac address"
+                                        name="sensorId" className="input" type="text" placeholder="Enter sensor ID"
                                         value={this.state.sensorId}
                                         onChange={this.handleChange}
                                     />

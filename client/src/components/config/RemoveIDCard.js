@@ -64,7 +64,7 @@ export default class AddSensor extends Component {
                             <div className="field">
                                 <p className="control has-icons-left has-icons-right">
                                     <input
-                                        name="idCardID" className="input" type="text" placeholder="Enter ID Card number"
+                                        name="idCardID" className="input" type="text" placeholder="Enter ID Card Number"
                                         value={this.state.idCardID}
                                         onChange={this.handleChange}
                                     />

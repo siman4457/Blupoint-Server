@@ -5,8 +5,8 @@ export default class AddSensor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            employeeName: '',
-            idCardNumber: '',
+            itemName: '',
+            idCardID: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,15 +24,15 @@ export default class AddSensor extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                employeeName: this.state.employeeName,
-                idCardNumber: this.state.idCardNumber
+                itemName: this.state.itemName,
+                idCardID: this.state.idCardID
             }),
         }).then(res => res.json())
             .catch(err => {
                 console.log(err);
                 console.log(JSON.stringify({
-                    employeeName: this.state.employeeName,
-                    idCardNumber: this.state.idCardNumber
+                    itemName: this.state.itemName,
+                    idCardID: this.state.idCardID
                 }));
             }
             );
@@ -67,8 +67,8 @@ export default class AddSensor extends Component {
                             <div className="field">
                                 <p className="control has-icons-left has-icons-right">
                                     <input
-                                        name="employeeName" className="input" type="text" placeholder="Enter Employee Name"
-                                        value={this.state.employeeName}
+                                        name="itemName" className="input" type="text" placeholder="Enter Item Name"
+                                        value={this.state.itemName}
                                         onChange={this.handleChange}
                                     />
                                     <span className="icon is-small is-left">
@@ -82,8 +82,8 @@ export default class AddSensor extends Component {
                             <div className="field">
                                 <p className="control has-icons-left">
                                     <input
-                                        name="idCardNumber" className="input" type="text" placeholder="Enter ID Card Number"
-                                        value={this.state.idCardNumber}
+                                        name="idCardID" className="input" type="text" placeholder="Enter ID Card Number"
+                                        value={this.state.idCardID}
                                         onChange={this.handleChange}
                                     />
                                     <span className="icon is-small is-left">
