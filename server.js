@@ -7,28 +7,27 @@ const bodyParser = require('body-parser');
 const { Client } = require('@elastic/elasticsearch')
 const esClient = new Client({ node: 'http://10.0.0.233:9200' })
 
-
-app.use(express.static('dist'));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.json());
 
 
-app.get("/api/get_sensors", async function(req, res) {
+app.get("/api/get_sensors", async function (req, res) {
   const sensors = (await esClient.search({
     index: 'blupoint_sensors',
     size: 10000,
     body: {
-        "query": {
-            "match_all": {}
-        }
+      "query": {
+        "match_all": {}
+      }
     }
-  })).body.hits.hits.map(function(i){
-    return i['_source']; 
+  })).body.hits.hits.map(function (i) {
+    return i['_source'];
   });
   console.log(sensors)
   res.json(sensors);
 });
 
-app.post("/api/create_sensor", async function(req, res) {
+app.post("/api/create_sensor", async function (req, res) {
   console.log("----------Creating Sensor---------------");
 
 
@@ -41,7 +40,7 @@ app.post("/api/create_sensor", async function(req, res) {
     refresh: true,
     body: req.body, //put js object here with needed fields
     id: sensorId
-  }) 
+  })
 
   return res.status(200).send({
     message: `POST create_sensor succeeded`
@@ -49,7 +48,7 @@ app.post("/api/create_sensor", async function(req, res) {
 
 });
 
-app.post("/api/remove_sensor", async function(req, res) {
+app.post("/api/remove_sensor", async function (req, res) {
   console.log("----------Removing Sensor---------------");
 
   const { sensorId } = req.body;
@@ -67,23 +66,23 @@ app.post("/api/remove_sensor", async function(req, res) {
 
 });
 
-app.get("/api/get_cards", async function(req, res) {
+app.get("/api/get_cards", async function (req, res) {
   const cards = (await esClient.search({
     index: 'blupoint_cards',
     size: 10000,
     body: {
-        "query": {
-            "match_all": {}
-        }
+      "query": {
+        "match_all": {}
+      }
     }
-  })).body.hits.hits.map(function(i){
-    return i['_source']; 
+  })).body.hits.hits.map(function (i) {
+    return i['_source'];
   });
   console.log(cards)
   res.json(sensors);
 });
 
-app.post("/api/create_id_card", async function(req, res) {
+app.post("/api/create_id_card", async function (req, res) {
   console.log("----------Creating ID Card---------------");
 
   const { itemName } = req.body;
@@ -103,7 +102,7 @@ app.post("/api/create_id_card", async function(req, res) {
 
 });
 
-app.post("/api/remove_id_card", async function(req, res) {
+app.post("/api/remove_id_card", async function (req, res) {
   console.log("----------Removing ID Card---------------");
 
   const { idCardID } = req.body
@@ -112,7 +111,7 @@ app.post("/api/remove_id_card", async function(req, res) {
   await esClient.update({
     index: 'blupoint_cards',
     refresh: true,
-    id: idCardID, 
+    id: idCardID,
   })
 
 
@@ -122,7 +121,7 @@ app.post("/api/remove_id_card", async function(req, res) {
 
 });
 
-app.get("/api/get_card_locations", async function(req, res) {
+app.get("/api/get_card_locations", async function (req, res) {
   console.log("----------Removing ID Card---------------");
 
   res.json(await esClient.search({
@@ -135,15 +134,14 @@ app.get("/api/get_card_locations", async function(req, res) {
       "inner_hits": {
         "name": "most_recent",
         "size": 1,
-        "sort": [{"time": "desc"}]
+        "sort": [{ "time": "desc" }]
       }
     }
-  }).body.hits.hits.map(function(i){
-    return i['_source']; 
+  }).body.hits.hits.map(function (i) {
+    return i['_source'];
   }));
 });
 
-// app.use("/testAPI", testAPIRouter);
 
 // SOCKETS
 // io.on("connection", socket => {
@@ -173,9 +171,9 @@ var io = require('socket.io');
 var server = io.listen(27015);
 
 var locations = {
-  1: [ 0, 0],
+  1: [0, 0],
   2: [10, 0],
-  3: [10,10]
+  3: [10, 10]
 }
 
 var rssi = {
@@ -201,7 +199,7 @@ server.on('connection', function (socket) {
   })
 })
 
-async function runLoc(){
+async function runLoc() {
   var cards = [];
   for (var n = 1; n < 4; n++) {
     for (var i in Object.keys(rssi[n])) {
@@ -216,7 +214,7 @@ async function runLoc(){
     var maxV = null;
     var currDate = new Date();
     for (var s in rssi) {
-      if (rssi[s][card] && rssi[s][card]['time'] && (((currDate.getTime() - rssi[s][card]['time'].getTime())/1000) < 3) && (maxV == null || rssi[s][card]['rssi'] > maxV)) {
+      if (rssi[s][card] && rssi[s][card]['time'] && (((currDate.getTime() - rssi[s][card]['time'].getTime()) / 1000) < 3) && (maxV == null || rssi[s][card]['rssi'] > maxV)) {
         max = 3;
         maxV = rssi[3][card]['rssi'];
       }
