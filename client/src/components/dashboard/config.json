@@ -1,0 +1,48 @@
+{
+    "buildings": [
+        {
+            "name": "Building 1",
+            "width": 400,
+            "height": 500,
+            "rooms": [
+                {
+                    "id": 1,
+                    "name": "Kitchen",
+                    "width": 200,
+                    "height": 200,
+                    "sensors": [
+                        {
+                            "id": "dq231",
+                            "x": 70,
+                            "y": 90
+                        },
+                        {
+                            "id": "1sfd2",
+                            "x": 110,
+                            "y": 90
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "name": "Bathroom",
+                    "width": 100,
+                    "height": 50
+                },
+                {
+                    "id": 3,
+                    "name": "Lobby",
+                    "width": 100,
+                    "height": 100,
+                    "sensors": [
+                        {
+                            "id": "dq231",
+                            "x": 40,
+                            "y": 50
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

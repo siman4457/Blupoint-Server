@@ -5,8 +5,9 @@ export default class AddSensor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sensorName: '',
-            macAddress: '',
+            // sensorName: '',
+            // macAddress: '',
+            sensorId: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,15 +25,14 @@ export default class AddSensor extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                sensorName: this.state.sensorName,
-                macAddress: this.state.macAddress
+                sensorId: this.state.sensorId,
+
             }),
         }).then(res => res.json())
             .catch(err => {
                 console.log(err);
                 console.log(JSON.stringify({
-                    sensorName: this.state.sensorName,
-                    macAddress: this.state.macAddress
+                    sensorId: this.state.sensorId,
                 }));
             }
             );
@@ -65,25 +65,10 @@ export default class AddSensor extends Component {
                         <section className="modal-card-body">
                             {/* <h1 className="title">Add a new sensor</h1> */}
                             <div className="field">
-                                <p className="control has-icons-left has-icons-right">
-                                    <input
-                                        name="sensorName" className="input" type="text" placeholder="Enter Sensor Name"
-                                        value={this.state.sensorName}
-                                        onChange={this.handleChange}
-                                    />
-                                    <span className="icon is-small is-left">
-                                        <i className="fas fa-envelope"></i>
-                                    </span>
-                                    <span className="icon is-small is-right">
-                                        <i className="fas fa-check" />
-                                    </span>
-                                </p>
-                            </div>
-                            <div className="field">
                                 <p className="control has-icons-left">
                                     <input
-                                        name="macAddress" className="input" type="text" placeholder="Enter mac address"
-                                        value={this.state.macAddress}
+                                        name="sensorId" className="input" type="text" placeholder="Enter sensor ID"
+                                        value={this.state.sensorId}
                                         onChange={this.handleChange}
                                     />
                                     <span className="icon is-small is-left">

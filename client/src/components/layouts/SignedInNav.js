@@ -8,7 +8,7 @@ class SignedInNav extends Component {
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <Link to={"/"} className="navbar-item">
-              <img className="nav-logo" src="./Icon.png" />
+              <img className="nav-logo" src="./Icon.png" alt="error loading logo" />
             </Link>
 
             {/* RESPONSIVE HAMBURGER MENU */}
