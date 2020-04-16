@@ -3,6 +3,7 @@
 // import io from "socket.io-client";
 import React from 'react'
 import Map from './Map'
+import SensorStatus from './SensorStatus'
 
 // let socket;
 
@@ -30,14 +31,13 @@ const Dashboard = ({ location }) => {
 
   return (
     <div>
-      <div className="container">
-        <div className="columns">
-          <div className="column is-one-third">
-            <h1>test</h1>
-          </div>
-          <div className="column is-two-thirds">
-            <Map></Map>
-          </div>
+      <div className="columns">
+        <div className="column is-one-third">
+          {/* <SensorStatus /> */}
+
+        </div>
+        <div className="column is-two-thirds">
+          <Map></Map>
         </div>
       </div>
     </div>

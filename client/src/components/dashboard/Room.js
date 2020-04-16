@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAtom } from '@fortawesome/free-solid-svg-icons'
 
-
-
 export default class Room extends Component {
 
     render() {
@@ -17,7 +15,6 @@ export default class Room extends Component {
             borderStyle: 'solid',
             position: 'relative'
         }
-
 
         //Atom icon symbolizes sensor
         return (
@@ -33,13 +30,10 @@ export default class Room extends Component {
                             top: y
                         }
                         return (
-                            <FontAwesomeIcon icon={faAtom} style={sensor_style} />
+                            <FontAwesomeIcon key={sensor.id} icon={faAtom} style={sensor_style} />
 
                         );
                     })}
-
-
-
             </div>
         )
     }

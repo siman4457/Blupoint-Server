@@ -13,9 +13,6 @@ export default class AddSensor extends Component {
     }
 
     handleSubmit() {
-        console.log(JSON.stringify({
-            name: 'test'
-        }))
 
         fetch('/api/create_id_card', {
             method: 'POST',
@@ -36,9 +33,6 @@ export default class AddSensor extends Component {
                 }));
             }
             );
-        // .then(response => {
-        //   console.log(response)
-        // });
 
     };
 

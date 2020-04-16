@@ -1,28 +1,131 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-// const history = require('connect-history-api-fallback');
 const bodyParser = require('body-parser');
-
 const { Client } = require('@elastic/elasticsearch')
 const esClient = new Client({ node: 'http://10.0.0.233:9200' })
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.json());
 
+app.get("/api/get_buildings", async function (req, res) {
+  //TODO: build query to construct a list of buildings in the following format:
+  const buildings = [
+    {
+      "id": 1,
+      "name": "Building 1",
+      "width": 400,
+      "height": 500,
+      "rooms": [
+        {
+          "id": 1,
+          "name": "Kitchen",
+          "width": 200,
+          "height": 200,
+          "sensors": [
+            {
+              "id": "dq231",
+              "x": 70,
+              "y": 90
+            },
+            {
+              "id": "1sfd2",
+              "x": 110,
+              "y": 90
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Bathroom",
+          "width": 100,
+          "height": 50
+        },
+        {
+          "id": 3,
+          "name": "Lobby",
+          "width": 100,
+          "height": 100,
+          "sensors": [
+            {
+              "id": "dq231",
+              "x": 40,
+              "y": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Building 2",
+      "width": 300,
+      "height": 300,
+      "rooms": [
+        {
+          "id": 1,
+          "name": "Kitchen",
+          "width": 100,
+          "height": 100,
+          "sensors": [
+            {
+              "id": "dq231",
+              "x": 70,
+              "y": 90
+            },
+            {
+              "id": "1sfd2",
+              "x": 110,
+              "y": 90
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Bathroom",
+          "width": 100,
+          "height": 50
+        },
+        {
+          "id": 3,
+          "name": "Lobby",
+          "width": 100,
+          "height": 100,
+          "sensors": [
+            {
+              "id": "dq231",
+              "x": 40,
+              "y": 50
+            }
+          ]
+        }
+      ]
+    }
+  ]
+
+  console.log(buildings)
+  res.json(buildings)
+});
+
 
 app.get("/api/get_sensors", async function (req, res) {
-  const sensors = (await esClient.search({
-    index: 'blupoint_sensors',
-    size: 10000,
-    body: {
-      "query": {
-        "match_all": {}
-      }
-    }
-  })).body.hits.hits.map(function (i) {
-    return i['_source'];
-  });
+  // const sensors = (await esClient.search({
+  //   index: 'blupoint_sensors',
+  //   size: 10000,
+  //   body: {
+  //     "query": {
+  //       "match_all": {}
+  //     }
+  //   }
+  // })).body.hits.hits.map(function (i) {
+  //   return i['_source'];
+  // });
+
+  const sensors = [
+    { id: 1, name: "sensor1", macAddress: "123456" },
+    { id: 2, name: "sensor2", macAddress: "265416" },
+    { id: 3, name: "sensor3", macAddress: "348654" }
+  ];
   console.log(sensors)
   res.json(sensors);
 });

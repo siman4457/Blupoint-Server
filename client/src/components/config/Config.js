@@ -6,9 +6,9 @@
 // import UseModal from "./UseModal";
 import React from 'react'
 import { Link } from "react-router-dom";
-import Sensors from "../hardware/Sensors";
 import Beacons from "../hardware/Beacons"
 import "./config.css";
+import SensorList from '../hardware/SensorList';
 
 // let socket;
 const Config = location => {
@@ -57,7 +57,7 @@ const Config = location => {
               Remove an ID card
             </Link>
           </div>
-          <Sensors />
+          <SensorList />
           <Beacons />
         </div>
       </div>

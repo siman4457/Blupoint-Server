@@ -1,0 +1,16 @@
+{
+    "sensors": [
+        {
+            "id": "dq231",
+            "room": "Kitchen",
+            "x": 70,
+            "y": 90
+        },
+        {
+            "id": "1sfd2",
+            "room": "Kitchen",
+            "x": 110,
+            "y": 90
+        }
+    ]
+}
