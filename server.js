@@ -8,6 +8,32 @@ const esClient = new Client({ node: 'http://10.0.0.233:9200' })
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.json());
 
+app.get("/api/get_sensors_by_room", async function (req, res) {
+  const { room_id } = req.query
+
+  //Get a list of sensors given the room_id
+  const sensors_from_db = [
+    {
+      id: 1,
+      name: "sensor1",
+      room_id: 1,
+      x: 70,
+      y: 90
+    },
+    {
+      id: 2,
+      name: "sensor2",
+      room_id: 1,
+      x: 110,
+      y: 90
+    }
+  ];
+
+  const sensors = sensors_from_db.filter(x => x.room_id == room_id);
+
+  res.json(sensors);
+})
+
 app.get("/api/get_buildings", async function (req, res) {
   //TODO: build query to construct a list of buildings in the following format:
   const buildings = [
@@ -22,18 +48,7 @@ app.get("/api/get_buildings", async function (req, res) {
           "name": "Kitchen",
           "width": 200,
           "height": 200,
-          "sensors": [
-            {
-              "id": "dq231",
-              "x": 70,
-              "y": 90
-            },
-            {
-              "id": "1sfd2",
-              "x": 110,
-              "y": 90
-            }
-          ]
+          "sensors": []
         },
         {
           "id": 2,
@@ -46,13 +61,7 @@ app.get("/api/get_buildings", async function (req, res) {
           "name": "Lobby",
           "width": 100,
           "height": 100,
-          "sensors": [
-            {
-              "id": "dq231",
-              "x": 40,
-              "y": 50
-            }
-          ]
+          "sensors": []
         }
       ]
     },
@@ -63,41 +72,24 @@ app.get("/api/get_buildings", async function (req, res) {
       "height": 300,
       "rooms": [
         {
-          "id": 1,
+          "id": 4,
           "name": "Kitchen",
           "width": 100,
           "height": 100,
-          "sensors": [
-            {
-              "id": "dq231",
-              "x": 70,
-              "y": 90
-            },
-            {
-              "id": "1sfd2",
-              "x": 110,
-              "y": 90
-            }
-          ]
+          "sensors": []
         },
         {
-          "id": 2,
+          "id": 5,
           "name": "Bathroom",
           "width": 100,
           "height": 50
         },
         {
-          "id": 3,
+          "id": 6,
           "name": "Lobby",
           "width": 100,
           "height": 100,
-          "sensors": [
-            {
-              "id": "dq231",
-              "x": 40,
-              "y": 50
-            }
-          ]
+          "sensors": []
         }
       ]
     }
@@ -107,6 +99,23 @@ app.get("/api/get_buildings", async function (req, res) {
   res.json(buildings)
 });
 
+app.post("/api/create_building", async function (req, res) {
+  console.log("----------Creating Building---------------");
+  console.log(req.body)
+
+  return res.status(200).send({
+    message: `POST create_building succeeded`
+  })
+})
+
+app.post("/api/remove_building", async function (req, res) {
+  console.log("----------Creating Building---------------");
+  const { building_id } = req.body
+
+  return res.status(200).send({
+    message: `POST create_building succeeded`
+  })
+})
 
 app.get("/api/get_sensors", async function (req, res) {
   // const sensors = (await esClient.search({
@@ -122,9 +131,20 @@ app.get("/api/get_sensors", async function (req, res) {
   // });
 
   const sensors = [
-    { id: 1, name: "sensor1", macAddress: "123456" },
-    { id: 2, name: "sensor2", macAddress: "265416" },
-    { id: 3, name: "sensor3", macAddress: "348654" }
+    {
+      id: 1,
+      name: "sensor1",
+      room_id: 1,
+      x: 70,
+      y: 90
+    },
+    {
+      id: 2,
+      name: "sensor2",
+      room_id: 1,
+      x: 110,
+      y: 90
+    }
   ];
   console.log(sensors)
   res.json(sensors);
@@ -134,8 +154,7 @@ app.post("/api/create_sensor", async function (req, res) {
   console.log("----------Creating Sensor---------------");
 
 
-  const { sensorName } = req.body;
-  const { sensorId } = req.body;
+  const { sensorName, sensorId, sensor_x, sensor_y, room_id } = req.body;
   console.log(req.body)
 
   await esClient.index({
@@ -170,19 +189,34 @@ app.post("/api/remove_sensor", async function (req, res) {
 });
 
 app.get("/api/get_cards", async function (req, res) {
-  const cards = (await esClient.search({
-    index: 'blupoint_cards',
-    size: 10000,
-    body: {
-      "query": {
-        "match_all": {}
-      }
+  // const cards = (await esClient.search({
+  //   index: 'blupoint_cards',
+  //   size: 10000,
+  //   body: {
+  //     "query": {
+  //       "match_all": {}
+  //     }
+  //   }
+  // })).body.hits.hits.map(function (i) {
+  //   return i['_source'];
+  // });
+
+  let cards = [
+    {
+      id: "1JHB3",
+      health: "Good",
+      status: "Connected",
+      age: "1 Wk"
+    },
+    {
+      id: "2IY5",
+      health: "Eh",
+      status: "Connected",
+      age: "2 Wks"
     }
-  })).body.hits.hits.map(function (i) {
-    return i['_source'];
-  });
+  ];
   console.log(cards)
-  res.json(sensors);
+  res.json(cards);
 });
 
 app.post("/api/create_id_card", async function (req, res) {
@@ -225,24 +259,26 @@ app.post("/api/remove_id_card", async function (req, res) {
 });
 
 app.get("/api/get_card_locations", async function (req, res) {
-  console.log("----------Removing ID Card---------------");
 
-  res.json(await esClient.search({
-    "index": 'blupoint_history',
-    "query": {
-      "match_all": {}
-    },
-    "collapse": {
-      "field": "card",
-      "inner_hits": {
-        "name": "most_recent",
-        "size": 1,
-        "sort": [{ "time": "desc" }]
-      }
-    }
-  }).body.hits.hits.map(function (i) {
-    return i['_source'];
-  }));
+
+  // res.json(await esClient.search({
+  //   "index": 'blupoint_history',
+  //   "query": {
+  //     "match_all": {}
+  //   },
+  //   "collapse": {
+  //     "field": "card",
+  //     "inner_hits": {
+  //       "name": "most_recent",
+  //       "size": 1,
+  //       "sort": [{ "time": "desc" }]
+  //     }
+  //   }
+  // }).body.hits.hits.map(function (i) {
+  //   return i['_source'];
+  // }));
+
+  //return array of objects -> {card_id, sensor_id}
 });
 
 

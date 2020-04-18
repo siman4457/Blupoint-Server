@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Building from './Building';
+import axios from 'axios';
 
 export default class Map extends Component {
     constructor(props) {
@@ -16,22 +17,21 @@ export default class Map extends Component {
     }
 
     componentDidMount() {
-        fetch('/api/get_buildings')
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        buildings: result,
-                        currentBuilding: result[0]
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                });
+
+        axios.all([
+            axios.get('/api/get_buildings'),
+            axios.get('/api/get_sensors')
+        ])
+            .then(axios.spread((buildingsRes, sensorsRes) => {
+                let buildings = buildingsRes.data
+                let sensors = sensorsRes.data
+                this.setState({
+                    isLoaded: true,
+                    buildings: buildings,
+                    currentBuilding: buildings[0]
+                })
+            }))
+
     }
 
     handleNext() {

@@ -12,6 +12,9 @@ import AddSensor from "./components/config/AddSensor";
 import RemoveSensor from "./components/config/RemoveSensor";
 import AddIDCard from "./components/config/AddIDCard";
 import RemoveIDCard from "./components/config/RemoveIDCard";
+import AddBuilding from "./components/config/AddBuilding";
+import RemoveBuilding from "./components/config/RemoveBuilding";
+
 
 function App() {
   return (
@@ -27,6 +30,8 @@ function App() {
           <Route path="/removesensor" exact component={RemoveSensor} />
           <Route path="/addidcard" exact component={AddIDCard} />
           <Route path="/removeidcard" exact component={RemoveIDCard} />
+          <Route path="/addbuilding" exact component={AddBuilding} />
+          <Route path="/removebuilding" exact component={RemoveBuilding} />
         </Switch>
       </div>
     </Router>

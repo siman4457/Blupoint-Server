@@ -6,35 +6,12 @@
 // import UseModal from "./UseModal";
 import React from 'react'
 import { Link } from "react-router-dom";
-import Beacons from "../hardware/Beacons"
+import CardList from "../hardware/CardList"
 import "./config.css";
 import SensorList from '../hardware/SensorList';
 
-// let socket;
+
 const Config = location => {
-  // const ENDPOINT = "localhost:5000";
-  // const [user, setUser] = useState("");
-  // const [modalType, setType] = useState("");
-
-  // const { isShowing, toggle_modal } = UseModal(modalType);
-
-  //Runs when the component renders
-  // useEffect(() => {
-  //   const { user } = queryString.parse(location.search); //Parse user from url
-  //   setUser(user);
-
-  //   const type = ""
-  //   setType(type);
-
-  //   // socket = io(ENDPOINT);
-
-  //   //complete useEffect with a return. This happens on unmounting of this component.
-  //   // return () => {
-  //   //   socket.emit("disconnect");
-
-  //   //   socket.off(); //This turns off a specific instance of the socket.
-  //   // };
-  // }, [ENDPOINT, location.search]);
 
   return (
     <div className="container">
@@ -56,9 +33,15 @@ const Config = location => {
             <Link to="/removeidcard" className="button lt-button config-control">
               Remove an ID card
             </Link>
+            <Link to="/addbuilding" className="button lt-button config-control">
+              Add a new building
+            </Link>
+            <Link to="/removebuilding" className="button lt-button config-control">
+              Remove a building
+            </Link>
           </div>
           <SensorList />
-          <Beacons />
+          <CardList />
         </div>
       </div>
     </div>

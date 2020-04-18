@@ -1,40 +1,35 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
-
+import axios from 'axios'
 export default class AddSensor extends Component {
     constructor(props) {
         super(props);
         this.state = {
             sensorName: '',
             sensorId: '',
+            sensor_x: 0,
+            sensor_y: 0,
+            room_id: 0
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit() {
-        fetch('/api/create_sensor', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                sensorName: this.state.sensorName,
-                sensorId: this.state.sensorId
-            }),
-        }).then(res => res.json())
-            .catch(err => {
-                console.log(err);
-                console.log(JSON.stringify({
-                    sensorName: this.state.sensorName,
-                    sensorId: this.state.sensorId
-                }));
-            }
-            );
-        // .then(response => {
-        //   console.log(response)
-        // });
+
+        axios.post('/api/create_sensor', {
+            sensorName: this.state.sensorName,
+            sensorId: this.state.sensorId,
+            sensor_x: this.state.sensor_x,
+            sensor_y: this.state.sensor_y,
+            room_id: this.state.room_id
+        })
+            .then(function (response) {
+                console.log(response)
+            })
+            .catch(function (error) { //Might want to avoid using catch to prevent blocking
+                console.log(error)
+            })
 
     };
 
@@ -61,31 +56,54 @@ export default class AddSensor extends Component {
                         <section className="modal-card-body">
                             {/* <h1 className="title">Add a new sensor</h1> */}
                             <div className="field">
-                                <p className="control has-icons-left has-icons-right">
-                                    <input
-                                        name="sensorName" className="input" type="text" placeholder="Enter Sensor Name"
-                                        value={this.state.sensorName}
-                                        onChange={this.handleChange}
-                                    />
-                                    <span className="icon is-small is-left">
-                                        <i className="fas fa-envelope"></i>
-                                    </span>
-                                    <span className="icon is-small is-right">
-                                        <i className="fas fa-check" />
-                                    </span>
-                                </p>
+
+                                <input
+                                    name="sensorName" className="input" type="text" placeholder="Enter Sensor Name"
+                                    value={this.state.sensorName}
+                                    onChange={this.handleChange}
+                                />
+
+
                             </div>
                             <div className="field">
-                                <p className="control has-icons-left">
+
+                                <input
+                                    name="sensorId" className="input" type="text" placeholder="Enter sensor ID"
+                                    value={this.state.sensorId}
+                                    onChange={this.handleChange}
+                                />
+
+                            </div>
+                            <div className="level">
+                                <div className="field level-item">
+                                    <label>Enter sensor X position</label>
                                     <input
-                                        name="sensorId" className="input" type="text" placeholder="Enter sensor ID"
-                                        value={this.state.sensorId}
+                                        name="sensor_x" className="input" type="number"
+                                        style={{ width: "70px", marginLeft: "15px" }}
+                                        value={this.state.sensor_x}
                                         onChange={this.handleChange}
                                     />
-                                    <span className="icon is-small is-left">
-                                        <i className="fa fa-address-card" aria-hidden="true" />
-                                    </span>
-                                </p>
+                                </div>
+                                <div className="field level-item">
+                                    <label>Enter sensor Y position</label>
+                                    <input
+                                        name="sensor_y" className="input" type="number"
+                                        style={{ width: "70px", marginLeft: "15px" }}
+                                        value={this.state.sensor_y}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+
+                            </div>
+                            <div className="field">
+                                {/* We want to eventually be able to allow the user to select which room from a drop down */}
+                                <label>Enter Room ID</label>
+                                <input
+                                    name="room_id" className="input" type="number"
+                                    style={{ width: "70px", marginLeft: "15px" }}
+                                    value={this.state.room_id}
+                                    onChange={this.handleChange}
+                                />
                             </div>
                         </section>
                         <footer className="modal-card-foot">
@@ -97,7 +115,7 @@ export default class AddSensor extends Component {
                             </Link>
                         </footer>
                     </div>
-                </div>
+                </div >
             </div >
         );
     }

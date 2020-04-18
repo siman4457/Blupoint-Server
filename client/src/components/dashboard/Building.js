@@ -2,12 +2,7 @@ import React, { Component } from 'react'
 import Room from './Room'
 
 export default class Building extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-
         const { rooms } = this.props
         return (
             <div>
