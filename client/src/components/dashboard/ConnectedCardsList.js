@@ -6,11 +6,13 @@ export default class ConnectedCardsList extends Component {
         return (
             <div>
                 {connectedCards &&
-                    connectedCards.map(card => {
+                    connectedCards.map(cardId => {
                         return (
-                            <p className="has-text-white">{card}</p>
+                            <p className="has-text-white id-card-label" key={cardId}>{cardId}</p>
+
                         );
                     })}
+
 
             </div>
         )

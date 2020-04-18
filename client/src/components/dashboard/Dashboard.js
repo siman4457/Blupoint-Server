@@ -6,7 +6,7 @@ const Dashboard = () => {
     <div>
       <div className="columns">
         <div className="column is-one-third">
-          {/* <SensorStatus /> */}
+
 
         </div>
         <div className="column is-two-thirds">

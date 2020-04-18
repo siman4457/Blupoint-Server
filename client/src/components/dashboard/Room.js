@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faAtom } from '@fortawesome/free-solid-svg-icons'
-import ConnectedCardsList from './ConnectedCardsList'
+
 import axios from 'axios'
+import Sensor from './Sensor';
 
 export default class Room extends Component {
     constructor(props) {
@@ -31,8 +32,8 @@ export default class Room extends Component {
     }
 
     render() {
-        const { room } = this.props
         const { sensors, error, isLoaded } = this.state
+        const { room } = this.props
         const { cardLocations } = this.props
 
         let room_styles = {
@@ -62,7 +63,8 @@ export default class Room extends Component {
                     <p className="room-title has-text-centered title is-6 has-text-white">{room.name}</p>
                     {sensors &&
                         sensors.map(sensor => {
-                            const connectedCards = cardLocations.filter(x => x.sensor_id === sensor.id) //MIGHT NEED TO BE == instead of ===
+                            const connectedCards = cardLocations.filter(x => x.sensorId == sensor.id).map(x => x.cardId); //MIGHT NEED TO BE == instead of ===
+
                             console.log("sensor " + sensor.id + " is connected to cards:", connectedCards)
 
                             let x = sensor.x.toString() + 'px';
@@ -73,9 +75,8 @@ export default class Room extends Component {
                                 top: y
                             }
                             return (
-                                <div>
-                                    <img className="sensor-icon" style={sensor_style} src={process.env.PUBLIC_URL + '/sensor_icon.png'} alt="Sensor icon failed to load" />
-                                    <ConnectedCardsList connectedCards={connectedCards} />
+                                <div key={sensor.id}>
+                                    <Sensor style={sensor_style} connectedCards={connectedCards} />
                                 </div>
                             );
                         })}

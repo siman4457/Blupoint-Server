@@ -9,6 +9,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.json());
 
 app.get("/api/get_sensors_by_room", async function (req, res) {
+  console.log("----------Get Sensors by rooms--------------");
   const { room_id } = req.query
 
   //Get a list of sensors given the room_id
@@ -35,6 +36,7 @@ app.get("/api/get_sensors_by_room", async function (req, res) {
 })
 
 app.get("/api/get_buildings", async function (req, res) {
+  console.log("----------Get Building--------------");
   //TODO: build query to construct a list of buildings in the following format:
   const buildings = [
     {
@@ -118,6 +120,7 @@ app.post("/api/remove_building", async function (req, res) {
 })
 
 app.get("/api/get_sensors", async function (req, res) {
+  console.log("----------Get Sensors--------------");
 
   // const sensors = (await esClient.search({
   //   index: 'blupoint_sensors',
@@ -189,6 +192,7 @@ app.post("/api/remove_sensor", async function (req, res) {
 });
 
 app.get("/api/get_cards", async function (req, res) {
+  console.log("----------Get Cards--------------");
   // const cards = (await esClient.search({
   //   index: 'blupoint_cards',
   //   size: 10000,
@@ -255,6 +259,7 @@ app.post("/api/remove_id_card", async function (req, res) {
 });
 
 app.get("/api/get_card_locations", async function (req, res) {
+  console.log("----------Get Card Locations---------------");
 
   // res.json(await esClient.search({
   //   "index": 'blupoint_history',
@@ -274,6 +279,17 @@ app.get("/api/get_card_locations", async function (req, res) {
   // }));
 
   //returns array of objects -> {card_id, sensor_id}
+  let connected_cards = [
+    {
+      cardId: "1JHB3",
+      sensorId: "1"
+    },
+    {
+      cardId: "2IY5",
+      sensorId: "2"
+    }
+  ];
+  res.json(connected_cards);
 });
 
 const PORT = process.env.PORT || 5000;

@@ -15,6 +15,7 @@ export default class Building extends Component {
         axios.get('/api/get_card_locations')
             .then(
                 (response) => {
+
                     this.setState({
                         cardLocations: response.data,
                         isLoaded: true
