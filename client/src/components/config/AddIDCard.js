@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
-
+import axios from 'axios'
 export default class AddSensor extends Component {
     constructor(props) {
         super(props);
@@ -14,26 +14,19 @@ export default class AddSensor extends Component {
 
     handleSubmit() {
 
-        fetch('/api/create_id_card', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                itemName: this.state.itemName,
-                idCardID: this.state.idCardID
-            }),
-        }).then(res => res.json())
-            .catch(err => {
-                console.log(err);
-                console.log(JSON.stringify({
-                    itemName: this.state.itemName,
-                    idCardID: this.state.idCardID
-                }));
-            }
-            );
 
+        axios.post('/api/create_id_card', {
+            itemName: this.state.itemName,
+            idCardID: this.state.idCardID
+        })
+            .then(function (response) {
+                console.log(response)
+            })
+            .catch(function (error) { //Might want to avoid using catch to prevent blocking
+                console.log(error)
+            })
+
+        window.location.href = "/config";
     };
 
     handleChange = (event) => {

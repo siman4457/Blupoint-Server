@@ -6,17 +6,15 @@ export default class AddSensor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // sensorName: '',
-            // macAddress: '',
-            sensorId: ''
+            buldingID: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit() {
-        axios.post('/api/remove_sensor', {
-            sensorId: this.state.sensorId
+        axios.post('/api/remove_building', {
+            buldingID: this.state.buldingID
         })
             .then(function (response) {
                 console.log(response)
@@ -24,7 +22,7 @@ export default class AddSensor extends Component {
             .catch(function (error) { //Might want to avoid using catch to prevent blocking
                 console.log(error)
             })
-
+        window.location.href = "/config";
     };
 
     handleChange = (event) => {
@@ -41,7 +39,7 @@ export default class AddSensor extends Component {
                     <div className="modal-background"></div>
                     <div className="modal-card">
                         <header className="modal-card-head">
-                            <p className="modal-card-title">Remove a Sensor</p>
+                            <p className="modal-card-title">Remove a Building</p>
                             <Link to={'/config'}
                                 className="delete"
                                 aria-label="close"
@@ -50,16 +48,11 @@ export default class AddSensor extends Component {
                         <section className="modal-card-body">
                             {/* <h1 className="title">Add a new sensor</h1> */}
                             <div className="field">
-                                <p className="control has-icons-left">
-                                    <input
-                                        name="sensorId" className="input" type="text" placeholder="Enter sensor ID"
-                                        value={this.state.sensorId}
-                                        onChange={this.handleChange}
-                                    />
-                                    <span className="icon is-small is-left">
-                                        <i className="fa fa-address-card" aria-hidden="true" />
-                                    </span>
-                                </p>
+                                <input
+                                    name="buldingID" className="input" type="text" placeholder="Enter building ID"
+                                    value={this.state.buldingID}
+                                    onChange={this.handleChange}
+                                />
                             </div>
                         </section>
                         <footer className="modal-card-foot">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAtom } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faAtom } from '@fortawesome/free-solid-svg-icons'
+import ConnectedCardsList from './ConnectedCardsList'
 import axios from 'axios'
 
 export default class Room extends Component {
@@ -25,17 +26,22 @@ export default class Room extends Component {
                 })
             }
         )
+
+
     }
 
     render() {
         const { room } = this.props
         const { sensors, error, isLoaded } = this.state
+        const { cardLocations } = this.props
 
         let room_styles = {
             width: room.width.toString() + 'px',
             height: room.height.toString() + 'px',
-            backgroundColor: 'blue', //Needs to be blue when occupued and white when empty
+            backgroundColor: '#3660BF', //Needs to be blue when occupued and white when empty
             borderStyle: 'solid',
+            borderWidth: '2px',
+            borderColor: 'black',
             position: 'relative'
         }
 
@@ -51,13 +57,14 @@ export default class Room extends Component {
             )
         }
         else {
-            console.log("testing room", room)
-            console.log('testing sensors', sensors)
             return (
                 <div style={room_styles}>
-                    <p className="has-text-centered">{room.name}</p>
+                    <p className="room-title has-text-centered title is-6 has-text-white">{room.name}</p>
                     {sensors &&
                         sensors.map(sensor => {
+                            const connectedCards = cardLocations.filter(x => x.sensor_id === sensor.id) //MIGHT NEED TO BE == instead of ===
+                            console.log("sensor " + sensor.id + " is connected to cards:", connectedCards)
+
                             let x = sensor.x.toString() + 'px';
                             let y = sensor.y.toString() + 'px';
                             let sensor_style = {
@@ -66,7 +73,10 @@ export default class Room extends Component {
                                 top: y
                             }
                             return (
-                                <FontAwesomeIcon key={sensor.id} icon={faAtom} style={sensor_style} />
+                                <div>
+                                    <img className="sensor-icon" style={sensor_style} src={process.env.PUBLIC_URL + '/sensor_icon.png'} alt="Sensor icon failed to load" />
+                                    <ConnectedCardsList connectedCards={connectedCards} />
+                                </div>
                             );
                         })}
                 </div>

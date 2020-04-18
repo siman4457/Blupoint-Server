@@ -24,4 +24,17 @@
 .modal-container {
   margin-top: 50px;
 }
+
+.modal-card {
+  max-height: 500px;
+}
+
+.room-title {
+  margin-top: 5px;
+}
+
+.sensor-icon {
+  width: 50px;
+  height: auto;
+}
 /*# sourceMappingURL=config.css.map */

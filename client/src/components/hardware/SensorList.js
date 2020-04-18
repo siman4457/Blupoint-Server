@@ -61,7 +61,7 @@ class SensorList extends Component {
                         sensors.map(sensor => {
                           return (
                             <tr key={sensor.id}>
-                              <th>{sensor.id}</th>
+                              <td>{sensor.id}</td>
                               <td>{sensor.name}</td>
                             </tr>
                           );

@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
-
+import axios from 'axios'
 export default class AddSensor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // sensorName: '',
-            // macAddress: '',
             sensorId: ''
         };
         this.handleChange = this.handleChange.bind(this);
@@ -14,31 +12,18 @@ export default class AddSensor extends Component {
     }
 
     handleSubmit() {
-        console.log(JSON.stringify({
-            name: 'test'
-        }))
 
-        fetch('/api/remove_sensor', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                sensorId: this.state.sensorId,
+        axios.post('/api/remove_sensor', {
+            sensorId: this.state.sensorId,
+        })
+            .then(function (response) {
+                console.log(response)
+            })
+            .catch(function (error) { //Might want to avoid using catch to prevent blocking
+                console.log(error)
+            })
 
-            }),
-        }).then(res => res.json())
-            .catch(err => {
-                console.log(err);
-                console.log(JSON.stringify({
-                    sensorId: this.state.sensorId,
-                }));
-            }
-            );
-        // .then(response => {
-        //   console.log(response)
-        // });
+        window.location.href = "/config";
 
     };
 

@@ -31,6 +31,8 @@ export default class AddSensor extends Component {
                 console.log(error)
             })
 
+        window.location.href = "/config";
+
     };
 
     handleChange = (event) => {

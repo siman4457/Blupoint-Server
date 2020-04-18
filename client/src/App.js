@@ -24,7 +24,6 @@ function App() {
         <Switch>
           <Route path="/" exact component={Dashboard} />
           {/* <Route path="/signin" component={SignIn} /> */}
-
           <Route path="/config" exact component={Config} />
           <Route path="/addsensor" exact component={AddSensor} />
           <Route path="/removesensor" exact component={RemoveSensor} />

@@ -109,7 +109,7 @@ app.post("/api/create_building", async function (req, res) {
 })
 
 app.post("/api/remove_building", async function (req, res) {
-  console.log("----------Creating Building---------------");
+  console.log("----------Removing Building---------------");
   const { building_id } = req.body
 
   return res.status(200).send({
@@ -118,6 +118,7 @@ app.post("/api/remove_building", async function (req, res) {
 })
 
 app.get("/api/get_sensors", async function (req, res) {
+
   // const sensors = (await esClient.search({
   //   index: 'blupoint_sensors',
   //   size: 10000,
@@ -146,13 +147,12 @@ app.get("/api/get_sensors", async function (req, res) {
       y: 90
     }
   ];
-  console.log(sensors)
+  // console.log(sensors)
   res.json(sensors);
 });
 
 app.post("/api/create_sensor", async function (req, res) {
   console.log("----------Creating Sensor---------------");
-
 
   const { sensorName, sensorId, sensor_x, sensor_y, room_id } = req.body;
   console.log(req.body)
@@ -204,18 +204,14 @@ app.get("/api/get_cards", async function (req, res) {
   let cards = [
     {
       id: "1JHB3",
-      health: "Good",
-      status: "Connected",
-      age: "1 Wk"
+      itemName: "Dog Food"
     },
     {
       id: "2IY5",
-      health: "Eh",
-      status: "Connected",
-      age: "2 Wks"
+      itemName: "Fish Tanks"
     }
   ];
-  console.log(cards)
+  // console.log(cards)
   res.json(cards);
 });
 
@@ -260,7 +256,6 @@ app.post("/api/remove_id_card", async function (req, res) {
 
 app.get("/api/get_card_locations", async function (req, res) {
 
-
   // res.json(await esClient.search({
   //   "index": 'blupoint_history',
   //   "query": {
@@ -278,26 +273,8 @@ app.get("/api/get_card_locations", async function (req, res) {
   //   return i['_source'];
   // }));
 
-  //return array of objects -> {card_id, sensor_id}
+  //returns array of objects -> {card_id, sensor_id}
 });
-
-
-// SOCKETS
-// io.on("connection", socket => {
-//   console.log("We have a new connection!");
-
-//   socket.on("add_sensor", ({ user }) => {
-//     console.log("Adding sensor for " + user);
-//   });
-
-//   socket.on("remove_sensor", ({ sensor_id, user }) => {
-//     console.log("Removing sensor " + sensor_id + " from " + user);
-//   });
-
-//   socket.on("disconnect", () => {
-//     console.log("User has left.");
-//   });
-// });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

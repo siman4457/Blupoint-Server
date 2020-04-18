@@ -24,7 +24,7 @@ export default class Map extends Component {
         ])
             .then(axios.spread((buildingsRes, sensorsRes) => {
                 let buildings = buildingsRes.data
-                let sensors = sensorsRes.data
+                // let sensors = sensorsRes.data
                 this.setState({
                     isLoaded: true,
                     buildings: buildings,
