@@ -16,6 +16,7 @@ import AddBuilding from "./components/config/AddBuilding";
 import RemoveBuilding from "./components/config/RemoveBuilding";
 
 
+
 function App() {
   return (
     <Router>

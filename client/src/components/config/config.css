@@ -34,7 +34,13 @@
 }
 
 .sensor-icon {
-  width: 50px;
+  width: 40px;
   height: auto;
+}
+
+.id-card-label {
+  margin: 1px;
+  font-size: 14px;
+  line-height: 14px;
 }
 /*# sourceMappingURL=config.css.map */

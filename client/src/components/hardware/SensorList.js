@@ -49,7 +49,7 @@ class SensorList extends Component {
             <section className="section">
               <div className="columns is-centered">
                 <div className="column is-narrow">
-                  <table className="table">
+                  <table className="table is-striped is-fullwidth">
                     <thead>
                       <tr>
                         <th title="Sensor">Sensor ID</th>

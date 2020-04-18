@@ -78,7 +78,7 @@ export default class AddBuilding extends Component {
 
                         <h2 className="has-text-centered">Adding the following rooms:</h2>
                         <br />
-                        <table style={{ width: '100%' }}>
+                        <table className="table is-striped is-fullwidth">
                             <thead>
                                 <tr>
                                     <th>Room Name</th>

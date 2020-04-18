@@ -76,7 +76,7 @@ export default class Room extends Component {
                             }
                             return (
                                 <div key={sensor.id}>
-                                    <Sensor style={sensor_style} connectedCards={connectedCards} />
+                                    <Sensor style={sensor_style} sensorId={sensor.id} connectedCards={connectedCards} />
                                 </div>
                             );
                         })}
