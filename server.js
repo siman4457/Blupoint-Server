@@ -192,7 +192,11 @@ app.get("/api/get_card_locations", async function (req, res) {
       "index": 'blupoint_history',
       "body": {
         "query": {
-          "match_all": {}
+          "range" : {
+            "time" : {
+              "gte" : ((new Date()).getTime() - 10*1000),
+            }
+          }
         },
         "collapse": {
           "field": "card",
@@ -204,8 +208,10 @@ app.get("/api/get_card_locations", async function (req, res) {
         }
       }
     })).body.hits.hits.map(function (i) {
-      return i['_source'];
+      return i['inner_hits']['most_recent']['hits']['hits'][0]['_source'];
     });
+    console.log('connected cards')
+    console.log(connected_cards)
     res.json(connected_cards);
   } catch(error) {
     console.log('error in card locations')
@@ -263,8 +269,8 @@ async function runLoc() {
         maxV = rssi[s][card]['rssi'];
       }
     }
-    console.log(card + ' is at ' + max)
     if (max != null) {
+      console.log(card + ' is at ' + max)
       await esClient.index({
         index: 'blupoint_history',
         body: {

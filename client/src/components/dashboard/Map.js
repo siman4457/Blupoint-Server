@@ -77,13 +77,6 @@ export default class Map extends Component {
                 margin: 0,
                 padding: 0
             }
-            // let building_container = {
-            //     width: "500px",
-            //     height: "500px",
-            //     // position: "absolute",
-            //     top: "10%",
-            //     left: "20%"
-            // }
 
             return (
                 <div>
