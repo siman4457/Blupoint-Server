@@ -15,4 +15,12 @@
       align-content: flex-start;
   margin: 10px;
 }
+
+.dashboard-container {
+  min-height: 100vh;
+}
+
+.map-container {
+  background-color: #dbdbdb;
+}
 /*# sourceMappingURL=Dashboard.css.map */

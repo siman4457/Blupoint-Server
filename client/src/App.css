@@ -10877,4 +10877,11 @@ fieldset[disabled] .select select:hover {
 .navbar-item {
   color: #FFFFFF;
 }
+
+.html {
+  height: 100%;
+  min-height: 100vh;
+  full-height: 100%;
+  background-color: #000000;
+}
 /*# sourceMappingURL=App.css.map */

@@ -26,7 +26,7 @@ export default class ConnectedCardsList extends Component {
 
         const sidebar_styling = {
             height: '100%',
-            minHeight: '100%',
+            minHeight: '100vh',
             backgroundColor: '#ffffff'
         }
 

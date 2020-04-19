@@ -94,7 +94,7 @@ export default class Map extends Component {
                             </button>
                         </div>
 
-                        <div className="level-item has-text-centered">
+                        <div className="map-container level-item has-text-centered">
                             <div className="room-container" style={building_container}>
                                 <Building building={this.state.currentBuilding} />
                             </div>
