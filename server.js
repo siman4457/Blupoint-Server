@@ -148,7 +148,8 @@ app.get("/api/get_sensors", async function (req, res) {
       room_id: 1,
       x: 110,
       y: 90
-    }
+    },
+
   ];
   // console.log(sensors)
   res.json(sensors);
@@ -286,6 +287,30 @@ app.get("/api/get_card_locations", async function (req, res) {
     },
     {
       cardId: "2IY5",
+      sensorId: "2"
+    },
+    {
+      cardId: "HL3B2",
+      sensorId: "2"
+    },
+    {
+      cardId: "345WH",
+      sensorId: "2"
+    },
+    {
+      cardId: "SFD435",
+      sensorId: "2"
+    },
+    {
+      cardId: "FDSVG45",
+      sensorId: "2"
+    },
+    {
+      cardId: "SFGVSG",
+      sensorId: "2"
+    },
+    {
+      cardId: "V435",
       sensorId: "2"
     }
   ];

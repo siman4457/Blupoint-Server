@@ -7,12 +7,14 @@ export default class AddBuilding extends Component {
         super(props);
         this.state = {
             buildingName: '',
-            building_x: 0,
-            building_y: 0,
+            building_width: 0,
+            building_length: 0,
             rooms: [],
             roomName: '',
             room_x: 0,
             room_y: 0,
+            room_width: 0,
+            room_length: 0
 
         };
         this.handleChange = this.handleChange.bind(this);
@@ -20,12 +22,10 @@ export default class AddBuilding extends Component {
     }
 
     handleSubmit() {
-        console.log('check state', this.state)
-
         axios.post('/api/create_building', {
             buildingName: this.state.buildingName,
-            building_x: this.state.building_x,
-            building_y: this.state.building_y,
+            building_width: this.state.building_width,
+            building_length: this.state.building_length,
             rooms: this.state.rooms
         })
             .then(function (response) {
@@ -50,7 +50,9 @@ export default class AddBuilding extends Component {
         let room = {
             roomName: this.state.roomName,
             room_x: this.state.room_x,
-            room_y: this.state.room_y
+            room_y: this.state.room_y,
+            room_width: this.state.room_width,
+            room_length: this.state.room_length
         }
 
         let rooms = this.state.rooms
@@ -63,7 +65,9 @@ export default class AddBuilding extends Component {
         this.setState({
             roomName: '',
             room_x: 0,
-            room_y: 0
+            room_y: 0,
+            room_width: 0,
+            room_length: 0
         })
     }
 
@@ -82,6 +86,8 @@ export default class AddBuilding extends Component {
                             <thead>
                                 <tr>
                                     <th>Room Name</th>
+                                    <th>Room X Position</th>
+                                    <th>Room Y Position</th>
                                     <th>Room Width</th>
                                     <th>Room Height</th>
                                 </tr>
@@ -93,6 +99,9 @@ export default class AddBuilding extends Component {
                                         <td>{r.roomName}</td>
                                         <td>{r.room_x}</td>
                                         <td>{r.room_y}</td>
+                                        <td>{r.room_width}</td>
+                                        <td>{r.room_length}</td>
+
                                     </tr>
                                 ))}
                             </tbody>
@@ -132,16 +141,16 @@ export default class AddBuilding extends Component {
                         <div className="field">
                             <label>Building width</label>
                             <input
-                                name="building_x" className="input" type="number"
-                                value={this.state.building_x}
+                                name="building_width" className="input" type="number"
+                                value={this.state.building_width}
                                 onChange={this.handleChange}
                             />
                         </div>
                         <div className="field">
                             <label>Building height</label>
                             <input
-                                name="building_y" className="input" type="number"
-                                value={this.state.building_y}
+                                name="building_length" className="input" type="number"
+                                value={this.state.building_length}
                                 onChange={this.handleChange}
                             />
                         </div>
@@ -155,16 +164,28 @@ export default class AddBuilding extends Component {
                                 onChange={this.handleChange}
                                 placeholder="Ex: Main Floor"
                             />
-                            <label>Room Width</label>
+                            <label>Room X Position</label>
                             <input
                                 name="room_x" className="input" type="number"
                                 value={this.state.room_x}
                                 onChange={this.handleChange}
                             />
-                            <label>Room Height</label>
+                            <label>Room Y Position</label>
                             <input
                                 name="room_y" className="input" type="number"
                                 value={this.state.room_y}
+                                onChange={this.handleChange}
+                            />
+                            <label>Room Width</label>
+                            <input
+                                name="room_width" className="input" type="number"
+                                value={this.state.room_width}
+                                onChange={this.handleChange}
+                            />
+                            <label>Room Height</label>
+                            <input
+                                name="room_length" className="input" type="number"
+                                value={this.state.room_length}
                                 onChange={this.handleChange}
                             />
 
