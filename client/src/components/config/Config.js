@@ -5,11 +5,16 @@
 // import FormModal from "./FormModal";
 // import UseModal from "./UseModal";
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
 import CardList from "../hardware/CardList"
-import "./config.css";
-import SensorList from '../hardware/SensorList';
+import "./config.css"
+import SensorList from '../hardware/SensorList'
 import AddSensor from './AddSensor'
+import AddIDCard from './AddIDCard'
+import AddBuilding from './AddBuilding'
+import RemoveBuilding from './RemoveBuilding'
+import RemoveIDCard from './RemoveIDCard'
+import RemoveSensor from './RemoveSensor'
+
 export default class Config extends Component {
   constructor(props) {
     super(props)
@@ -18,14 +23,46 @@ export default class Config extends Component {
     }
   }
 
-  render() {
-    let currentView = this.state.currentView
-    function updateView(viewName) {
+  updateView(view) {
+    this.setState({
+      currentView: view
+    })
+  }
 
-      if (viewName === 'AddSensor') {
-        return (
-          <AddSensor />
-        )
+  render() {
+
+    function View({ currentView }) {
+      console.log('test', currentView)
+
+      if (currentView === 'AddSensor') {
+        return (<AddSensor />)
+      }
+      if (currentView === 'RemoveSensor') {
+        return (<RemoveSensor />)
+      }
+      else if (currentView === 'AddIDCard') {
+        return (<AddIDCard />)
+      }
+      else if (currentView === 'RemoveIDCard') {
+        return (<RemoveIDCard />)
+      }
+      else if (currentView === 'AddBuilding') {
+        return (<AddBuilding />)
+      }
+      else if (currentView === 'RemoveBuilding') {
+        return (<RemoveBuilding />)
+      }
+      else if (currentView === 'CardList') {
+        return (<CardList />)
+      }
+      else if (currentView === 'SensorList') {
+        return (<SensorList />)
+      }
+      else if (currentView === 'BuildingList') {
+        return (<p>Need to make building list</p>)
+      }
+      else {
+        return (<CardList />)
       }
     }
 
@@ -39,13 +76,13 @@ export default class Config extends Component {
               </p>
               <ul className="menu-list">
                 <li>
-                  View all buildings
+                  <button className="button config-control" onClick={() => this.updateView('BuildingList')}>View all buildings</button>
                 </li>
                 <li>
-                  View all sensors
+                  <button className="button config-control" onClick={() => this.updateView('SensorList')}>View all sensors</button>
                 </li>
                 <li>
-                  View all ID cards
+                  <button className="button config-control" onClick={() => this.updateView('CardList')}>View all ID cards</button>
                 </li>
               </ul>
               <p className="menu-label">
@@ -53,49 +90,41 @@ export default class Config extends Component {
               </p>
               <ul className="menu-list">
                 <li>
-                  <Link to="/addsensor" className="config-control">
-                    Add a new sensor
-                  </Link>
-                  {/* <button className="congig-control" onClick={() => updateView('AddSensor')}>Add a new sensor</button> */}
+                  <button className="button config-control" onClick={() => this.updateView('AddSensor')}>Add a new sensor</button>
                 </li>
+
                 <li>
-                  <Link to="/removesensor" className="config-control">
-                    Remove a sensor
-                </Link>
+                  <button className="button config-control" onClick={() => this.updateView('RemoveSensor')}>Remove a sensor</button>
                 </li>
+
                 <li>
-                  <Link to="/addidcard" className="config-control">
-                    Add an ID card
-              </Link>
+                  <button className="button config-control" onClick={() => this.updateView('AddIDCard')}>Add an ID card</button>
                 </li>
+
                 <li>
-                  <Link to="/removeidcard" className="config-control">
-                    Remove an ID card
-              </Link>
+                  <button className="button config-control" onClick={() => this.updateView('RemoveIDCard')}>Remove an ID card</button>
                 </li>
+
                 <li>
-                  <Link to="/addbuilding" className="config-control">
-                    Add a new building
-              </Link>
+                  <button className="button config-control" onClick={() => this.updateView('AddBuilding')}>Add a new building</button>
                 </li>
+
                 <li>
-                  <Link to="/removebuilding" className="config-control">
-                    Remove a building
-                </Link>
+                  <button className="button config-control" onClick={() => this.updateView('RemoveBuilding')}>Remove a building</button>
                 </li>
+
               </ul>
             </aside>
+          </div>
 
-          </div>
           <div className="column is-two-thirds">
-            <br />
-            {/* <View /> */}
+            <div className="container">
+              <View currentView={this.state.currentView} />
+            </div>
           </div>
+
         </div>
       </div>
-
-
-
     );
   }
 }

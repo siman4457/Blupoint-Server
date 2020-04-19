@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom"
 import axios from 'axios'
 export default class AddSensor extends Component {
     constructor(props) {
@@ -42,77 +41,77 @@ export default class AddSensor extends Component {
 
     };
 
+    handleCancel = () => {
+        this.setState({
+            sensor_name: '',
+            sensor_id: '',
+            sensor_x: 0,
+            sensor_y: 0,
+            room_id: ''
+        })
+    }
+
     render() {
         return (
-            <div className="modal-container">
-                <div>
-                    <div className="modal-background"></div>
-                    <div className="modal-card">
-                        <header className="modal-card-head">
-                            <p className="modal-card-title">Add a new Sensor</p>
-                            <Link to={'/config'}
-                                className="delete"
-                                aria-label="close"
-                            ></Link>
-                        </header>
-                        <section className="modal-card-body">
-                            {/* <h1 className="title">Add a new sensor</h1> */}
-                            <div className="field">
-                                <input
-                                    name="sensor_name" className="input" type="text" placeholder="Enter Sensor Name"
-                                    value={this.state.sensor_name}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                            <div className="field">
-
-                                <input
-                                    name="sensor_id" className="input" type="text" placeholder="Enter sensor ID"
-                                    value={this.state.sensor_id}
-                                    onChange={this.handleChange}
-                                />
-
-                            </div>
-                            <div className="level">
-                                <div className="field level-item">
-                                    <label>Enter sensor X position</label>
-                                    <input
-                                        name="sensor_x" className="input" type="number"
-                                        style={{ width: "70px", marginLeft: "15px" }}
-                                        value={this.state.sensor_x}
-                                        onChange={this.handleChange}
-                                    />
-                                </div>
-                                <div className="field level-item">
-                                    <label>Enter sensor Y position</label>
-                                    <input
-                                        name="sensor_y" className="input" type="number"
-                                        style={{ width: "70px", marginLeft: "15px" }}
-                                        value={this.state.sensor_y}
-                                        onChange={this.handleChange}
-                                    />
-                                </div>
-
-                            </div>
-                            <div className="field">
-                                <input
-                                    name="room_id" className="input" type="text" placeholder="Enter Room ID"
-                                    value={this.state.room_id}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                        </section>
-                        <footer className="modal-card-foot">
-                            <button className="button is-success" onClick={this.handleSubmit}>
-                                Save
-                            </button>
-                            <Link className="button" to={"/config"}>
-                                Cancel
-                            </Link>
-                        </footer>
+            <div>
+                <section>
+                    <h1 className="title">Add a new sensor</h1>
+                    <div className="field">
+                        <input
+                            name="sensor_name" className="input" type="text" placeholder="Enter Sensor Name"
+                            value={this.state.sensor_name}
+                            onChange={this.handleChange}
+                        />
                     </div>
-                </div >
+                    <div className="field">
+
+                        <input
+                            name="sensor_id" className="input" type="text" placeholder="Enter sensor ID"
+                            value={this.state.sensor_id}
+                            onChange={this.handleChange}
+                        />
+
+                    </div>
+                    <div className="level">
+                        <div className="field level-item">
+                            <label>Enter sensor X position</label>
+                            <input
+                                name="sensor_x" className="input" type="number"
+                                style={{ width: "70px", marginLeft: "15px" }}
+                                value={this.state.sensor_x}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className="field level-item">
+                            <label>Enter sensor Y position</label>
+                            <input
+                                name="sensor_y" className="input" type="number"
+                                style={{ width: "70px", marginLeft: "15px" }}
+                                value={this.state.sensor_y}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+
+                    </div>
+                    <div className="field">
+                        <input
+                            name="room_id" className="input" type="text" placeholder="Enter Room ID"
+                            value={this.state.room_id}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                </section>
+                <footer >
+                    <button className="button is-success" onClick={this.handleSubmit}>
+                        Save
+                    </button>
+                    <button className="button" onClick={this.handleCancel}>
+                        Cancel
+                    </button>
+                </footer>
+
             </div >
+
         );
     }
 }
