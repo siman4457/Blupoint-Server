@@ -5,8 +5,8 @@ export default class AddSensor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            itemName: '',
-            idCardID: '',
+            name: '',
+            id: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,8 +16,8 @@ export default class AddSensor extends Component {
 
 
         axios.post('/api/create_id_card', {
-            itemName: this.state.itemName,
-            idCardID: this.state.idCardID
+            name: this.state.name,
+            id: this.state.id
         })
             .then(function (response) {
                 console.log(response)
@@ -54,8 +54,8 @@ export default class AddSensor extends Component {
                             <div className="field">
                                 <p className="control has-icons-left has-icons-right">
                                     <input
-                                        name="itemName" className="input" type="text" placeholder="Enter Item Name"
-                                        value={this.state.itemName}
+                                        name="name" className="input" type="text" placeholder="Enter Card Name"
+                                        value={this.state.name}
                                         onChange={this.handleChange}
                                     />
                                     <span className="icon is-small is-left">
@@ -69,8 +69,8 @@ export default class AddSensor extends Component {
                             <div className="field">
                                 <p className="control has-icons-left">
                                     <input
-                                        name="idCardID" className="input" type="text" placeholder="Enter ID Card Number"
-                                        value={this.state.idCardID}
+                                        name="id" className="input" type="text" placeholder="Enter Card ID"
+                                        value={this.state.id}
                                         onChange={this.handleChange}
                                     />
                                     <span className="icon is-small is-left">

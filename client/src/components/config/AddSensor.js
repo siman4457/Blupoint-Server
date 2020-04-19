@@ -5,11 +5,11 @@ export default class AddSensor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sensorName: '',
-            sensorId: '',
+            sensor_name: '',
+            sensor_id: '',
             sensor_x: 0,
             sensor_y: 0,
-            room_id: 0
+            room_id: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,8 +18,8 @@ export default class AddSensor extends Component {
     handleSubmit() {
 
         axios.post('/api/create_sensor', {
-            sensorName: this.state.sensorName,
-            sensorId: this.state.sensorId,
+            sensor_name: this.state.sensor_name,
+            sensor_id: this.state.sensor_id,
             sensor_x: this.state.sensor_x,
             sensor_y: this.state.sensor_y,
             room_id: this.state.room_id
@@ -58,20 +58,17 @@ export default class AddSensor extends Component {
                         <section className="modal-card-body">
                             {/* <h1 className="title">Add a new sensor</h1> */}
                             <div className="field">
-
                                 <input
-                                    name="sensorName" className="input" type="text" placeholder="Enter Sensor Name"
-                                    value={this.state.sensorName}
+                                    name="sensor_name" className="input" type="text" placeholder="Enter Sensor Name"
+                                    value={this.state.sensor_name}
                                     onChange={this.handleChange}
                                 />
-
-
                             </div>
                             <div className="field">
 
                                 <input
-                                    name="sensorId" className="input" type="text" placeholder="Enter sensor ID"
-                                    value={this.state.sensorId}
+                                    name="sensor_id" className="input" type="text" placeholder="Enter sensor ID"
+                                    value={this.state.sensor_id}
                                     onChange={this.handleChange}
                                 />
 
@@ -98,11 +95,8 @@ export default class AddSensor extends Component {
 
                             </div>
                             <div className="field">
-                                {/* We want to eventually be able to allow the user to select which room from a drop down */}
-                                <label>Enter Room ID</label>
                                 <input
-                                    name="room_id" className="input" type="number"
-                                    style={{ width: "70px", marginLeft: "15px" }}
+                                    name="room_id" className="input" type="text" placeholder="Enter Room ID"
                                     value={this.state.room_id}
                                     onChange={this.handleChange}
                                 />

@@ -17,7 +17,7 @@ export default class Room extends Component {
 
     componentDidMount() {
         const { room } = this.props;
-        const room_id = room.id
+        const room_id = room.room_id
 
         axios.get('/api/get_sensors_by_room', { params: { room_id: room_id } }).then(
             (response) => {
@@ -37,8 +37,7 @@ export default class Room extends Component {
         const { scalex } = this.props
         const { scaley } = this.props
         const { cardLocations } = this.props
-        console.log(room)
-        console.log(scalex)
+        console.log(cardLocations)
         let room_styles = {
             width:  (Math.floor(room.width*scalex)).toString() + 'px',
             height: (Math.floor(room.height*scaley)).toString() + 'px',
@@ -65,21 +64,21 @@ export default class Room extends Component {
         else {
             return (
                 <div style={room_styles}>
-                    <p className="room-title has-text-centered title is-6 has-text-white">{room.name}</p>
+                    <p className="room-title has-text-centered title is-6 has-text-white">{room.room_name}</p>
                     {sensors &&
                         sensors.map(sensor => {
-                            const connectedCards = cardLocations.filter(x => x.sensorId == sensor.id).map(x => x.cardId); //MIGHT NEED TO BE == instead of ===
+                            const connectedCards = cardLocations.filter(x => x.sensor == sensor.sensor_id).map(x => x.card);
 
-                            console.log("sensor " + sensor.id + " is connected to cards:", connectedCards)
-                            let x = sensor.x.toString() + 'px';
-                            let y = sensor.y.toString() + 'px';
+                            console.log("sensor " + sensor.sensor_id + " is connected to cards:", connectedCards)
+                            let x = sensor.sensor_x.toString() + 'px';
+                            let y = sensor.sensor_y.toString() + 'px';
                             let sensor_style = {
                                 position: 'absolute',
                                 left: x,
                                 top: y
                             }
                             return (
-                                <div key={sensor.id}>
+                                <div key={sensor.sensor_id}>
                                     <Sensor style={sensor_style} sensorId={sensor.id} connectedCards={connectedCards} />
                                 </div>
                             );

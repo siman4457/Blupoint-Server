@@ -51,9 +51,9 @@ export default class ConnectedCardsList extends Component {
                             {cardLocations &&
                                 cardLocations.map(locationObj => {
                                     return (
-                                        <tr key={locationObj.cardId}>
-                                            <td>{locationObj.sensorId}</td>
-                                            <td>{locationObj.cardId}</td>
+                                        <tr key={locationObj.card}>
+                                            <td>{locationObj.sensor}</td>
+                                            <td>{locationObj.card}</td>
                                         </tr>
                                     );
                                 })}

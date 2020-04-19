@@ -47,7 +47,7 @@ export default class Building extends Component {
                     {rooms &&
                         rooms.map(room => {
                             return (
-                                <div key={room.id}>
+                                <div key={room.room_id}>
                                     <Room room={room} sensors={room.sensors} cardLocations={cardLocations} scalex={500/width} scaley={500/height} />
                                 </div>
                             );

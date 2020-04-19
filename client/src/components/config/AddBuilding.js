@@ -6,11 +6,12 @@ export default class AddBuilding extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            buildingName: '',
+            building_name: '',
             building_width: 0,
             building_length: 0,
             rooms: [],
-            roomName: '',
+            room_name: '',
+            room_id: '',
             room_x: 0,
             room_y: 0,
             room_width: 0,
@@ -23,7 +24,7 @@ export default class AddBuilding extends Component {
 
     handleSubmit() {
         axios.post('/api/create_building', {
-            buildingName: this.state.buildingName,
+            building_name: this.state.building_name,
             building_width: this.state.building_width,
             building_length: this.state.building_length,
             rooms: this.state.rooms
@@ -48,7 +49,8 @@ export default class AddBuilding extends Component {
     addRoom() {
         //Add validation to see if these are filled before adding to rooms
         let room = {
-            roomName: this.state.roomName,
+            room_name: this.state.room_name,
+            room_id: this.state.room_id,
             room_x: this.state.room_x,
             room_y: this.state.room_y,
             room_width: this.state.room_width,
@@ -63,7 +65,8 @@ export default class AddBuilding extends Component {
         })
 
         this.setState({
-            roomName: '',
+            room_name: '',
+            room_id: '',
             room_x: 0,
             room_y: 0,
             room_width: 0,
@@ -72,7 +75,6 @@ export default class AddBuilding extends Component {
     }
 
     render() {
-        // let { rooms } = this.state
 
         function ShowRoomTable(state) {
             let rooms = state.rooms.rooms
@@ -86,6 +88,7 @@ export default class AddBuilding extends Component {
                             <thead>
                                 <tr>
                                     <th>Room Name</th>
+                                    <th>Room ID</th>
                                     <th>Room X Position</th>
                                     <th>Room Y Position</th>
                                     <th>Room Width</th>
@@ -95,8 +98,9 @@ export default class AddBuilding extends Component {
                             <tbody>
                                 {rooms && rooms.map((r) => (
                                     // TODO: NEED TO CHANGE KEY TO ROOM ID EVENTUALLY?
-                                    <tr key={r.roomName}>
-                                        <td>{r.roomName}</td>
+                                    <tr key={r.room_id}>
+                                        <td>{r.room_name}</td>
+                                        <td>{r.room_id}</td>
                                         <td>{r.room_x}</td>
                                         <td>{r.room_y}</td>
                                         <td>{r.room_width}</td>
@@ -133,8 +137,8 @@ export default class AddBuilding extends Component {
                         <div className="field">
                             <label>Building Name</label>
                             <input
-                                name="buildingName" className="input" type="text" placeholder="Ex: Main Facility"
-                                value={this.state.buildingName}
+                                name="building_name" className="input" type="text" placeholder="Ex: Main Facility"
+                                value={this.state.building_name}
                                 onChange={this.handleChange}
                             />
                         </div>
@@ -159,8 +163,15 @@ export default class AddBuilding extends Component {
                         <div className="field">
                             <label>Room Name</label>
                             <input
-                                name="roomName" className="input" type="text"
-                                value={this.state.roomName}
+                                name="room_name" className="input" type="text"
+                                value={this.state.room_name}
+                                onChange={this.handleChange}
+                                placeholder="Ex: Main Floor"
+                            />
+                            <label>Room ID</label>
+                            <input
+                                name="room_id" className="input" type="text"
+                                value={this.state.room_id}
                                 onChange={this.handleChange}
                                 placeholder="Ex: Main Floor"
                             />

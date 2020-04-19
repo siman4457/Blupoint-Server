@@ -52,9 +52,8 @@ class BeaconList extends Component {
                                 <table className="table is-striped is-fullwidth">
                                     <thead>
                                         <tr>
+                                            <th title="Beacon">Card Name</th>
                                             <th title="Beacon">Card ID</th>
-                                            <th title="Health">Health</th>
-                                            <th title="Status">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,9 +61,8 @@ class BeaconList extends Component {
                                             cards.map(card => {
                                                 return (
                                                     <tr key={card.id}>
-                                                        <th>{card.id}</th>
-                                                        <td>{card.health}</td>
-                                                        <td>{card.status}</td>
+                                                        <th>{card.name}</th>
+                                                        <td>{card.id}</td>
                                                     </tr>
                                                 );
                                             })}

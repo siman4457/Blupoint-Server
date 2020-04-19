@@ -38,9 +38,9 @@ class SignedInNav extends Component {
 
             <div className="navbar-end">
               <div className="navbar-item">
-                <div className="buttons">
+                {/* <div className="buttons">
                   <span className="button is-light">Log out</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

@@ -71,11 +71,6 @@ export default class Map extends Component {
             )
         }
         else if (buildings.length > 0) {
-
-            // let building_container = {
-            //     width: this.state.currentBuilding.width.toString() + 'px',
-            //     height: this.state.currentBuilding.height.toString() + 'px',
-            // }
             let building_container = {
                 width: "500px",
                 height: "500px",
