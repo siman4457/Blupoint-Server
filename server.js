@@ -42,27 +42,33 @@ app.get("/api/get_buildings", async function (req, res) {
     {
       "id": 1,
       "name": "Building 1",
-      "width": 400,
+      "width": 500,
       "height": 500,
       "rooms": [
         {
           "id": 1,
           "name": "Kitchen",
-          "width": 200,
-          "height": 200,
+          "room_x": 0,
+          "room_y": 0,
+          "width": 300,
+          "height": 300,
           "sensors": []
         },
         {
           "id": 2,
           "name": "Bathroom",
-          "width": 100,
-          "height": 50
+          "room_x": 300,
+          "room_y": 0,
+          "width": 150,
+          "height": 150
         },
         {
           "id": 3,
           "name": "Lobby",
-          "width": 100,
-          "height": 100,
+          "room_x": 300,
+          "room_y": 150,
+          "width": 75,
+          "height": 75,
           "sensors": []
         }
       ]
