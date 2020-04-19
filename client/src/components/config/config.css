@@ -17,8 +17,14 @@
   margin: 10px 0;
 }
 
+.menu {
+  background-color: #FFFFFF;
+  min-height: 100vh;
+  padding: 15px;
+}
+
 .config-control {
-  margin: 5px;
+  margin: 10px;
 }
 
 .modal-container {

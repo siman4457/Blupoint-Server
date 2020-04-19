@@ -70,8 +70,6 @@ class SensorList extends Component {
               </div>
             </div>
           </section>
-
-
         </div>
       )
     }

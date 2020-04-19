@@ -31,12 +31,29 @@ export default class Building extends Component {
         const { cardLocations, error, isLoaded } = this.state;
 
         let building_container = {
-            width: building_width.toString() + 'px',
-            height: building_length.toString() + 'px',
+            // width: building_width.toString() + 'px',
+            // height: building_length.toString() + 'px',
+            width: building_width + 'px',
+            height: building_length + 'px',
             margin: 0,
             padding: 0,
             position: 'relative'
         }
+
+        //Update card locations every 5 seconds
+        const interval = setInterval(function () {
+            console.log("Updating card locations")
+            axios.get('/api/get_card_locations')
+                .then(
+                    (response) => {
+
+                        this.setState({
+                            cardLocations: response.data,
+                            isLoaded: true
+                        })
+                    }
+                )
+        }.bind(this), 5000)
 
         if (error) {
             return (
@@ -49,13 +66,14 @@ export default class Building extends Component {
             )
         }
         else {
+            clearInterval(interval);
             return (
                 <div style={building_container}>
                     {rooms &&
                         rooms.map(room => {
                             return (
                                 <div key={room.room_id}>
-                                    <Room room={room} sensors={room.sensors} cardLocations={cardLocations} scalex={500/building_width} scaley={500/building_length} />
+                                    <Room room={room} sensors={room.sensors} cardLocations={cardLocations} scalex={500 / building_width} scaley={500 / building_length} />
                                 </div>
                             );
                         })}

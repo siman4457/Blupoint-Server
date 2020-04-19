@@ -71,12 +71,12 @@ export default class Map extends Component {
             )
         }
         else if (buildings.length > 0) {
-            let building_container = {
-                width: this.state.currentBuilding.building_width.toString() + 'px',
-                height: this.state.currentBuilding.building_length.toString() + 'px',
-                margin: 0,
-                padding: 0
-            }
+            // let building_container = {
+            //     width: this.state.currentBuilding.building_width.toString() + 'px',
+            //     height: this.state.currentBuilding.building_length.toString() + 'px',
+            //     margin: 0,
+            //     padding: 0
+            // }
 
             return (
                 <div>

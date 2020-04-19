@@ -64,7 +64,7 @@ export default class Room extends Component {
             )
         }
         else {
-            console.log('room_styles', room_styles)
+
             return (
                 <div style={room_styles}>
                     <p className="room-title has-text-centered title is-6 has-text-white">{room.room_name}</p>
