@@ -34,20 +34,22 @@ export default class Room extends Component {
     render() {
         const { sensors, error, isLoaded } = this.state
         const { room } = this.props
-        const { scalex } = this.props
-        const { scaley } = this.props
+        // const { scalex } = this.props
+        // const { scaley } = this.props
         const { cardLocations } = this.props
-        console.log(cardLocations)
+
         let room_styles = {
-            width:  (Math.floor(room.width*scalex)).toString() + 'px',
-            height: (Math.floor(room.height*scaley)).toString() + 'px',
-            left: (Math.floor(room.x*scalex)).toString() + 'px',
-            top: (Math.floor(room.y*scaley)).toString() + 'px',
+            width: room.width + 'px',
+            height: room.height + 'px',
+            left: room.room_x + 'px',
+            top: room.room_y + 'px',
             backgroundColor: '#3660BF', //Needs to be blue when occupued and white when empty
             borderStyle: 'solid',
             borderWidth: '2px',
             borderColor: 'black',
-            position: 'absolute'
+            position: 'absolute',
+            float: 'left',
+            display: 'inlineBlock'
         }
 
 
@@ -62,6 +64,7 @@ export default class Room extends Component {
             )
         }
         else {
+            console.log('room_styles', room_styles)
             return (
                 <div style={room_styles}>
                     <p className="room-title has-text-centered title is-6 has-text-white">{room.room_name}</p>

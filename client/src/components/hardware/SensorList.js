@@ -45,34 +45,32 @@ class SensorList extends Component {
     else {
       return (
         <div>
-          <div className="container">
-            <section className="section">
-              <div className="columns is-centered">
-                <div className="column is-narrow">
-                  <table className="table is-striped is-fullwidth">
-                    <thead>
-                      <tr>
-                        <th title="Sensor">Sensor ID</th>
-                        <th title="Name">Name</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {sensors &&
-                        sensors.map(sensor => {
-                          console.log(sensor)
-                          return (
-                            <tr key={sensor.sensor_id}>
-                              <td>{sensor.sensor_id}</td>
-                              <td>{sensor.sensor_name}</td>
-                            </tr>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </div>
+          <section className="section">
+            <div className="columns is-centered">
+              <div className="column is-narrow">
+                <table className="table is-striped is-fullwidth">
+                  <thead>
+                    <tr>
+                      <th title="Sensor">Sensor ID</th>
+                      <th title="Name">Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sensors &&
+                      sensors.map(sensor => {
+                        return (
+                          <tr key={sensor.id}>
+                            <td>{sensor.sensor_id}</td>
+                            <td>{sensor.sensor_name}</td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
               </div>
-            </section>
-          </div>
+            </div>
+          </section>
+
 
         </div>
       )

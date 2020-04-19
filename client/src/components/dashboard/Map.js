@@ -47,11 +47,11 @@ export default class Map extends Component {
 
     handlePrevious() {
         const cur_index = this.state.buildings.indexOf(this.state.currentBuilding);
-        let next = null
+        let prev = null
         if (cur_index > 0 && cur_index <= this.state.buildings.length - 1) {
-            next = this.state.buildings[cur_index - 1]
+            prev = this.state.buildings[cur_index - 1]
             this.setState({
-                currentBuilding: next
+                currentBuilding: prev
             });
         }
     };
@@ -72,12 +72,18 @@ export default class Map extends Component {
         }
         else if (buildings.length > 0) {
             let building_container = {
-                width: "500px",
-                height: "500px",
-                position: "absolute",
-                top: "10%",
-                left: "20%"
+                width: this.state.currentBuilding.building_width.toString() + 'px',
+                height: this.state.currentBuilding.building_length.toString() + 'px',
+                margin: 0,
+                padding: 0
             }
+            // let building_container = {
+            //     width: "500px",
+            //     height: "500px",
+            //     // position: "absolute",
+            //     top: "10%",
+            //     left: "20%"
+            // }
 
             return (
                 <div>
@@ -89,10 +95,9 @@ export default class Map extends Component {
                             </button>
                         </div>
 
-                        <div className="level-item has-text-centered">
-                            <div className="room-container" style={building_container}>
-                                <Building building={this.state.currentBuilding} />
-                            </div>
+                        <div className="map-container level-item">
+                            {/* <div className="room-container" style={building_container}> */}
+                            <Building building={this.state.currentBuilding} />
                         </div>
 
                         <div className="level-item has-text-centered">

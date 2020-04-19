@@ -44,6 +44,7 @@ app.get("/api/get_buildings", async function (req, res) {
       "query": {
         "match_all": {}
       }
+
     }
   })).body.hits.hits.map(function (i) {
     var temp = i['_source'];

@@ -26,10 +26,17 @@ export default class Building extends Component {
 
     render() {
         const rooms = this.props.building.rooms;
-        const width = this.props.building.width;
-        const height = this.props.building.height;
+        const building_width = this.props.building.building_width;
+        const building_length = this.props.building.building_length;
         const { cardLocations, error, isLoaded } = this.state;
-        console.log()
+
+        let building_container = {
+            width: building_width.toString() + 'px',
+            height: building_length.toString() + 'px',
+            margin: 0,
+            padding: 0,
+            position: 'relative'
+        }
 
         if (error) {
             return (
@@ -43,12 +50,12 @@ export default class Building extends Component {
         }
         else {
             return (
-                <div>
+                <div style={building_container}>
                     {rooms &&
                         rooms.map(room => {
                             return (
                                 <div key={room.room_id}>
-                                    <Room room={room} sensors={room.sensors} cardLocations={cardLocations} scalex={500/width} scaley={500/height} />
+                                    <Room room={room} sensors={room.sensors} cardLocations={cardLocations} scalex={500/building_width} scaley={500/building_length} />
                                 </div>
                             );
                         })}
