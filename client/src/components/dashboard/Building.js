@@ -25,8 +25,11 @@ export default class Building extends Component {
     }
 
     render() {
-        const { rooms } = this.props
-        const { cardLocations, error, isLoaded } = this.state
+        const rooms = this.props.building.rooms;
+        const width = this.props.building.width;
+        const height = this.props.building.height;
+        const { cardLocations, error, isLoaded } = this.state;
+        console.log()
 
         if (error) {
             return (
@@ -45,7 +48,7 @@ export default class Building extends Component {
                         rooms.map(room => {
                             return (
                                 <div key={room.id}>
-                                    <Room room={room} sensors={room.sensors} cardLocations={cardLocations} />
+                                    <Room room={room} sensors={room.sensors} cardLocations={cardLocations} scalex={500/width} scaley={500/height} />
                                 </div>
                             );
                         })}

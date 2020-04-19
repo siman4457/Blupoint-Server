@@ -78,7 +78,10 @@ export default class Map extends Component {
             // }
             let building_container = {
                 width: "500px",
-                height: "500px"
+                height: "500px",
+                position: "absolute",
+                top: "10%",
+                left: "20%"
             }
 
             return (
@@ -93,7 +96,7 @@ export default class Map extends Component {
 
                         <div className="level-item has-text-centered">
                             <div className="room-container" style={building_container}>
-                                <Building rooms={this.state.currentBuilding.rooms} />
+                                <Building building={this.state.currentBuilding} />
                             </div>
                         </div>
 

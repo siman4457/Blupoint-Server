@@ -34,16 +34,21 @@ export default class Room extends Component {
     render() {
         const { sensors, error, isLoaded } = this.state
         const { room } = this.props
+        const { scalex } = this.props
+        const { scaley } = this.props
         const { cardLocations } = this.props
-
+        console.log(room)
+        console.log(scalex)
         let room_styles = {
-            width: room.width.toString() + 'px',
-            height: room.height.toString() + 'px',
+            width:  (Math.floor(room.width*scalex)).toString() + 'px',
+            height: (Math.floor(room.height*scaley)).toString() + 'px',
+            left: (Math.floor(room.x*scalex)).toString() + 'px',
+            top: (Math.floor(room.y*scaley)).toString() + 'px',
             backgroundColor: '#3660BF', //Needs to be blue when occupued and white when empty
             borderStyle: 'solid',
             borderWidth: '2px',
             borderColor: 'black',
-            position: 'relative'
+            position: 'absolute'
         }
 
 
@@ -66,7 +71,6 @@ export default class Room extends Component {
                             const connectedCards = cardLocations.filter(x => x.sensorId == sensor.id).map(x => x.cardId); //MIGHT NEED TO BE == instead of ===
 
                             console.log("sensor " + sensor.id + " is connected to cards:", connectedCards)
-
                             let x = sensor.x.toString() + 'px';
                             let y = sensor.y.toString() + 'px';
                             let sensor_style = {
