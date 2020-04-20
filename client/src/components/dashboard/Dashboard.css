@@ -13,7 +13,7 @@
           justify-content: center;
   -ms-flex-line-pack: start;
       align-content: flex-start;
-  margin: 10px;
+  margin: 0;
 }
 
 .dashboard-container {

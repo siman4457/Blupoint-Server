@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom"
 import axios from 'axios'
 
 export default class AddSensor extends Component {
@@ -32,40 +31,36 @@ export default class AddSensor extends Component {
 
     };
 
+    handleCancel = () => {
+        this.setState({
+            buldingID: ''
+        })
+    }
+
     render() {
         return (
-            <div className="modal-container">
-                <div>
-                    <div className="modal-background"></div>
-                    <div className="modal-card">
-                        <header className="modal-card-head">
-                            <p className="modal-card-title">Remove a Building</p>
-                            <Link to={'/config'}
-                                className="delete"
-                                aria-label="close"
-                            ></Link>
-                        </header>
-                        <section className="modal-card-body">
-                            {/* <h1 className="title">Add a new sensor</h1> */}
-                            <div className="field">
-                                <input
-                                    name="buldingID" className="input" type="text" placeholder="Enter building ID"
-                                    value={this.state.buldingID}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                        </section>
-                        <footer className="modal-card-foot">
-                            <button className="button is-danger" onClick={this.handleSubmit}>
-                                Remove
-                            </button>
-                            <Link className="button" to={"/config"}>
-                                Cancel
-                            </Link>
-                        </footer>
+            <div style={{ padding: '20px' }}>
+                <section>
+                    <h1 className="title">Remove a building</h1>
+                    <div className="field">
+                        <input
+                            name="buldingID" className="input" type="text" placeholder="Enter building ID"
+                            value={this.state.buldingID}
+                            onChange={this.handleChange}
+                        />
                     </div>
-                </div>
-            </div >
+                </section>
+                <br />
+                <footer>
+                    <button className="button is-danger" onClick={this.handleSubmit}>
+                        Save
+                    </button>
+                   &emsp;
+                    <button className="button" onClick={this.handleCancel}>
+                        Cancel
+                    </button>
+                </footer>
+            </div>
         );
     }
 }

@@ -11,8 +11,9 @@ export default class Sensor extends Component {
             cards_text = 'Cards'
         }
 
+        const { style } = this.props
         return (
-            <div>
+            <div style={style}>
                 <img className="sensor-icon" src={process.env.PUBLIC_URL + '/sensor_icon.png'} alt="Sensor icon failed to load" />
 
                 <p className="has-text-white id-card-label">
