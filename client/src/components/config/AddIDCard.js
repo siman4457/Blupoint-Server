@@ -13,8 +13,6 @@ export default class AddSensor extends Component {
     }
 
     handleSubmit() {
-
-
         axios.post('/api/create_id_card', {
             name: this.state.name,
             id: this.state.id
@@ -36,60 +34,44 @@ export default class AddSensor extends Component {
 
     };
 
+    handleCancel = () => {
+        this.setState({
+            name: '',
+            id: '',
+        })
+    }
+
     render() {
         return (
-            <div className="modal-container">
-                <div>
-                    <div className="modal-background"></div>
-                    <div className="modal-card">
-                        <header className="modal-card-head">
-                            <p className="modal-card-title">Add a new ID Card</p>
-                            <Link to={'/config'}
-                                className="delete"
-                                aria-label="close"
-                            ></Link>
-                        </header>
-                        <section className="modal-card-body">
-                            {/* <h1 className="title">Add a new sensor</h1> */}
-                            <div className="field">
-                                <p className="control has-icons-left has-icons-right">
-                                    <input
-                                        name="name" className="input" type="text" placeholder="Enter Card Name"
-                                        value={this.state.name}
-                                        onChange={this.handleChange}
-                                    />
-                                    <span className="icon is-small is-left">
-                                        <i className="fas fa-envelope"></i>
-                                    </span>
-                                    <span className="icon is-small is-right">
-                                        <i className="fas fa-check" />
-                                    </span>
-                                </p>
-                            </div>
-                            <div className="field">
-                                <p className="control has-icons-left">
-                                    <input
-                                        name="id" className="input" type="text" placeholder="Enter Card ID"
-                                        value={this.state.id}
-                                        onChange={this.handleChange}
-                                    />
-                                    <span className="icon is-small is-left">
-                                        <i className="fa fa-address-card" aria-hidden="true" />
-                                    </span>
-                                </p>
-                            </div>
-                        </section>
-                        <footer className="modal-card-foot">
-                            <button className="button is-success" onClick={this.handleSubmit}>
-                                Save
-                            </button>
-                            <Link className="button" to={"/config"}>
-                                Cancel
-                            </Link>
-                        </footer>
+            <div style={{ padding: '20px' }}>
+                <section>
+                    <h1 className="title">Add a new ID Card</h1>
+                    <div className="field">
+                        <input
+                            name="name" className="input" type="text" placeholder="Enter Card Name"
+                            value={this.state.name}
+                            onChange={this.handleChange}
+                        />
                     </div>
-                </div>
-            </div >
+                    <div className="field">
+                        <input
+                            name="id" className="input" type="text" placeholder="Enter Card ID"
+                            value={this.state.id}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                </section>
+                <br />
+                <footer>
+                    <button className="button is-danger" onClick={this.handleSubmit}>
+                        Save
+                    </button>
+                   &emsp;
+                    <button className="button" onClick={this.handleCancel}>
+                        Cancel
+                    </button>
+                </footer>
+            </div>
         );
     }
 }

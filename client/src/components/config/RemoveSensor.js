@@ -34,45 +34,40 @@ export default class AddSensor extends Component {
 
     };
 
+    handleCancel = () => {
+        this.setState({
+            sensorId: ''
+        })
+    }
+
     render() {
         return (
-            <div className="modal-container">
-                <div>
-                    <div className="modal-background"></div>
-                    <div className="modal-card">
-                        <header className="modal-card-head">
-                            <p className="modal-card-title">Remove a Sensor</p>
-                            <Link to={'/config'}
-                                className="delete"
-                                aria-label="close"
-                            ></Link>
-                        </header>
-                        <section className="modal-card-body">
-                            {/* <h1 className="title">Add a new sensor</h1> */}
-                            <div className="field">
-                                <p className="control has-icons-left">
-                                    <input
-                                        name="sensorId" className="input" type="text" placeholder="Enter sensor ID"
-                                        value={this.state.sensorId}
-                                        onChange={this.handleChange}
-                                    />
-                                    <span className="icon is-small is-left">
-                                        <i className="fa fa-address-card" aria-hidden="true" />
-                                    </span>
-                                </p>
-                            </div>
-                        </section>
-                        <footer className="modal-card-foot">
-                            <button className="button is-danger" onClick={this.handleSubmit}>
-                                Remove
-                            </button>
-                            <Link className="button" to={"/config"}>
-                                Cancel
-                            </Link>
-                        </footer>
+            <div style={{ padding: '20px' }}>
+                <section>
+                    <h1 className="title">Remove a sensor</h1>
+                    <div className="field">
+
+                        <input
+                            name="sensorId" className="input" type="text" placeholder="Enter sensor ID"
+                            value={this.state.sensorId}
+                            onChange={this.handleChange}
+                        />
+
                     </div>
-                </div>
-            </div >
+                </section>
+                <br />
+                <footer>
+                    <button className="button is-danger" onClick={this.handleSubmit}>
+                        Remove
+                    </button>
+                   &emsp;
+                    <button className="button" onClick={this.handleCancel}>
+                        Cancel
+                    </button>
+                </footer>
+
+            </div>
+
         );
     }
 }

@@ -49,4 +49,10 @@
   font-size: 14px;
   line-height: 14px;
 }
+
+.form-container {
+  padding: 20px;
+  overfolw: auto;
+  max-height: 100vh;
+}
 /*# sourceMappingURL=config.css.map */

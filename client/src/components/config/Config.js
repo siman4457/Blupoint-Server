@@ -76,13 +76,13 @@ export default class Config extends Component {
               </p>
               <ul className="menu-list">
                 <li>
-                  <button className="button config-control" onClick={() => this.updateView('BuildingList')}>View all buildings</button>
+                  <a className="config-control" onClick={() => this.updateView('BuildingList')}>View all buildings</a>
                 </li>
                 <li>
-                  <button className="button config-control" onClick={() => this.updateView('SensorList')}>View all sensors</button>
+                  <a className="config-control" onClick={() => this.updateView('SensorList')}>View all sensors</a>
                 </li>
                 <li>
-                  <button className="button config-control" onClick={() => this.updateView('CardList')}>View all ID cards</button>
+                  <a className="config-control" onClick={() => this.updateView('CardList')}>View all ID cards</a>
                 </li>
               </ul>
               <p className="menu-label">
@@ -90,27 +90,27 @@ export default class Config extends Component {
               </p>
               <ul className="menu-list">
                 <li>
-                  <button className="button config-control" onClick={() => this.updateView('AddSensor')}>Add a new sensor</button>
+                  <a className=" config-control" onClick={() => this.updateView('AddSensor')}>Add a new sensor</a>
                 </li>
 
                 <li>
-                  <button className="button config-control" onClick={() => this.updateView('RemoveSensor')}>Remove a sensor</button>
+                  <a className=" config-control" onClick={() => this.updateView('RemoveSensor')}>Remove a sensor</a>
                 </li>
 
                 <li>
-                  <button className="button config-control" onClick={() => this.updateView('AddIDCard')}>Add an ID card</button>
+                  <a className=" config-control" onClick={() => this.updateView('AddIDCard')}>Add an ID card</a>
                 </li>
 
                 <li>
-                  <button className="button config-control" onClick={() => this.updateView('RemoveIDCard')}>Remove an ID card</button>
+                  <a className=" config-control" onClick={() => this.updateView('RemoveIDCard')}>Remove an ID card</a>
                 </li>
 
                 <li>
-                  <button className="button config-control" onClick={() => this.updateView('AddBuilding')}>Add a new building</button>
+                  <a className=" config-control" onClick={() => this.updateView('AddBuilding')}>Add a new building</a>
                 </li>
 
                 <li>
-                  <button className="button config-control" onClick={() => this.updateView('RemoveBuilding')}>Remove a building</button>
+                  <a className=" config-control" onClick={() => this.updateView('RemoveBuilding')}>Remove a building</a>
                 </li>
 
               </ul>
@@ -118,7 +118,10 @@ export default class Config extends Component {
           </div>
 
           <div className="column is-two-thirds">
-            <div className="container">
+            <div style={{
+            maxHeight: '100vh',
+            overflow: 'auto'
+            }}>
               <View currentView={this.state.currentView} />
             </div>
           </div>

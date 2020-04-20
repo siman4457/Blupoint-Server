@@ -53,7 +53,7 @@ export default class AddSensor extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{ padding: '20px' }}>
                 <section>
                     <h1 className="title">Add a new sensor</h1>
                     <div className="field">
@@ -101,10 +101,12 @@ export default class AddSensor extends Component {
                         />
                     </div>
                 </section>
+                <br />
                 <footer >
                     <button className="button is-success" onClick={this.handleSubmit}>
                         Save
                     </button>
+                    &emsp;
                     <button className="button" onClick={this.handleCancel}>
                         Cancel
                     </button>
