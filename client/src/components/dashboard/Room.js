@@ -27,31 +27,26 @@ export default class Room extends Component {
                 })
             }
         )
-
-
     }
 
     render() {
         const { sensors, error, isLoaded } = this.state
         const { room } = this.props
-        // const { scalex } = this.props
-        // const { scaley } = this.props
+        const { scalex } = this.props
+        const { scaley } = this.props
         const { cardLocations } = this.props
-
         let room_styles = {
-            width: room.width + 'px',
-            height: room.height + 'px',
-            left: room.room_x + 'px',
-            top: room.room_y + 'px',
+            width: (Math.floor(room.room_width*scalex)).toString() + '%',
+            height: (Math.floor(room.room_length*scaley)).toString() + '%',
+            left: (Math.floor(room.room_x*scalex)) + '%',
+            top: (Math.floor(room.room_y*scaley)) + '%',
             backgroundColor: '#3660BF', //Needs to be blue when occupued and white when empty
             borderStyle: 'solid',
             borderWidth: '2px',
             borderColor: 'black',
             position: 'absolute',
-            float: 'left',
             display: 'inlineBlock'
         }
-
 
         if (error) {
             return (
@@ -64,26 +59,25 @@ export default class Room extends Component {
             )
         }
         else {
-            console.log('room_styles', room_styles)
             return (
                 <div style={room_styles}>
                     <p className="room-title has-text-centered title is-6 has-text-white">{room.room_name}</p>
                     {sensors &&
                         sensors.map(sensor => {
                             const connectedCards = cardLocations.filter(x => x.sensor == sensor.sensor_id).map(x => x.card);
-
                             console.log("sensor " + sensor.sensor_id + " is connected to cards:", connectedCards)
-                            let x = sensor.sensor_x.toString() + 'px';
-                            let y = sensor.sensor_y.toString() + 'px';
+                            let x = sensor.sensor_x.toString() + '%';
+                            let y = sensor.sensor_y.toString() + '%';
                             let sensor_style = {
                                 position: 'absolute',
+                                //display: 'inlineBlock',
                                 left: x,
                                 top: y
                             }
+                            console.log(sensor_style)
+
                             return (
-                                <div key={sensor.sensor_id}>
-                                    <Sensor style={sensor_style} sensorId={sensor.id} connectedCards={connectedCards} />
-                                </div>
+                                <Sensor style={sensor_style} sensorId={sensor.sensor_name} connectedCards={connectedCards} />
                             );
                         })}
                 </div>

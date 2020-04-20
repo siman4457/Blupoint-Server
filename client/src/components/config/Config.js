@@ -7,6 +7,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import CardList from "../hardware/CardList"
+import BuildingList from "../hardware/BuildingList"
 import "./config.css";
 import SensorList from '../hardware/SensorList';
 
@@ -42,6 +43,7 @@ const Config = location => {
           </div>
           <SensorList />
           <CardList />
+          <BuildingList />
         </div>
       </div>
     </div>

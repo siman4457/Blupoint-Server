@@ -72,28 +72,31 @@ export default class Map extends Component {
         }
         else if (buildings.length > 0) {
             let building_container = {
-                width: this.state.currentBuilding.building_width.toString() + 'px',
-                height: this.state.currentBuilding.building_length.toString() + 'px',
+                width: '100%',
+                height: '100%',
                 margin: 0,
                 padding: 0
+            }
+            const arrowStyle = {
+                maxWidth: "5vw"
             }
 
             return (
                 <div>
-                    <h1 className="has-text-centered title is-1">{this.state.currentBuilding.name}</h1>
+                    <h1 className="has-text-centered title is-1">{this.state.currentBuilding.building_name}</h1>
                     <div className="level">
-                        <div className="level-item has-text-centered">
+                        <div className="level-item has-text-centered" style={arrowStyle}>
                             <button className="button is-success" onClick={this.handlePrevious.bind(this)}>
                                 <FontAwesomeIcon icon={faArrowLeft} />
                             </button>
                         </div>
 
-                        <div className="map-container level-item">
+                        <div className="map-container level-item" style={{height: '800px'}}>
                             {/* <div className="room-container" style={building_container}> */}
                             <Building building={this.state.currentBuilding} />
                         </div>
 
-                        <div className="level-item has-text-centered">
+                        <div className="level-item has-text-centered" style={arrowStyle}>
                             <button className="button is-success" onClick={this.handleNext.bind(this)}>
                                 <FontAwesomeIcon icon={faArrowRight} />
                             </button>

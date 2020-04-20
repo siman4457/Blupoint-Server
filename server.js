@@ -60,7 +60,8 @@ app.post("/api/create_building", async function (req, res) {
   await esClient.index({
     index: 'blupoint_buildings',
     refresh: true,
-    body: req.body
+    body: req.body,
+    id: req.body.building_id
   })
 
   return res.status(200).send({
@@ -219,6 +220,31 @@ app.get("/api/get_card_locations", async function (req, res) {
   }
 });
 
+app.get("/api/get_history", async function (req, res) {
+  console.log("----------Get Historical Locations---------------");
+  try {
+    let historical_cards = (await esClient.search({
+      "index": 'blupoint_history',
+      "body": {
+        "query": {
+          "range" : {
+            "time" : {
+              "lte" : req.body.start,
+              "gte" : req.body.end
+            }
+          }
+        }
+      }
+    })).body.hits.hits.map(function (i) {
+      return i['_source'];
+    });
+    res.json(historical_cards);
+  } catch(error) {
+    console.log('error in card locations')
+    console.log(error.meta.body.error)
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
 
@@ -234,12 +260,14 @@ server.on('connection', function (socket) {
   console.log('connection')
 
   socket.on('location', function (from) {
-    if (!(from.id in rssi)) {
-      rssi[from.id] = {}
-    }
-    rssi[from.id][from.card] = {
-      rssi: from.rssi,
-      time: new Date()
+    if (from.card != "\"020b010264f45374376e3372\"") {
+      if (!(from.id in rssi)) {
+        rssi[from.id] = {}
+      }
+      rssi[from.id][from.card] = {
+        rssi: from.rssi,
+        time: new Date()
+      }
     }
   })
 

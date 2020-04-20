@@ -11,22 +11,30 @@ export default class ConnectedCardsList extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api/get_card_locations')
-            .then(
-                (response) => {
-                    this.setState({
-                        cardLocations: response.data,
-                        isLoaded: true
-                    })
+        axios.all([
+                axios.get('/api/get_card_locations'),
+                axios.get('/api/get_cards'),
+                axios.get('/api/get_sensors')
+            ])
+            .then(axios.spread((cardLocationRes, cardsRes, sensorsRes) => {
+                // let sensors = sensorsRes.data
+                this.setState({
+                    isLoaded: true,
+                    cardLocations: cardLocationRes.data,
+                    sensors: sensorsRes.data,
+                    cards: cardsRes.data,
                 })
+                console.log(this.state)
+            }))
     }
 
     render() {
-        const { cardLocations } = this.state
+        const { cardLocations, cards, sensors } = this.state
 
         const sidebar_styling = {
             height: '100%',
             minHeight: '100vh',
+            maxWidth: '300px',
             backgroundColor: '#ffffff'
         }
 
@@ -50,10 +58,16 @@ export default class ConnectedCardsList extends Component {
                         <tbody>
                             {cardLocations &&
                                 cardLocations.map(locationObj => {
+                                    var sensor = locationObj.sensor;
+                                    if(sensors.filter(x => x.sensor_id == locationObj.sensor)[0])
+                                        sensor = sensors.filter(x => x.sensor_id == locationObj.sensor)[0].sensor_name
+                                    var card = locationObj.card
+                                    if (cards.filter(x => x.id == locationObj.card)[0]) 
+                                        card = cards.filter(x => x.id == locationObj.card)[0].name
                                     return (
                                         <tr key={locationObj.card}>
-                                            <td>{locationObj.sensor}</td>
-                                            <td>{locationObj.card}</td>
+                                            <td>{sensor}</td>
+                                            <td>{card}</td>
                                         </tr>
                                     );
                                 })}

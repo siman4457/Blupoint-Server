@@ -22,6 +22,18 @@ export default class Building extends Component {
                     })
                 }
             )
+        const interval = setInterval(() => {
+            axios.get('/api/get_card_locations')
+                .then(
+                    (response) => {
+
+                        this.setState({
+                            cardLocations: response.data,
+                            isLoaded: true
+                        })
+                    }
+                )
+        }, 2000);
     }
 
     render() {
@@ -31,8 +43,8 @@ export default class Building extends Component {
         const { cardLocations, error, isLoaded } = this.state;
 
         let building_container = {
-            width: building_width.toString() + 'px',
-            height: building_length.toString() + 'px',
+            width: '100%',
+            height: '100%',
             margin: 0,
             padding: 0,
             position: 'relative'
@@ -54,9 +66,7 @@ export default class Building extends Component {
                     {rooms &&
                         rooms.map(room => {
                             return (
-                                <div key={room.room_id}>
-                                    <Room room={room} sensors={room.sensors} cardLocations={cardLocations} scalex={500/building_width} scaley={500/building_length} />
-                                </div>
+                                <Room room={room} sensors={room.sensors} cardLocations={cardLocations} scalex={100/building_width} scaley={100/building_length} />
                             );
                         })}
                 </div>
