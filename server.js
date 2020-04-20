@@ -152,14 +152,11 @@ app.get("/api/get_cards", async function (req, res) {
 app.post("/api/create_id_card", async function (req, res) {
   console.log("----------Creating ID Card---------------");
 
-  const { itemName } = req.body;
-  const { idCardID } = req.body;
-
   await esClient.index({
     index: 'blupoint_cards',
     refresh: true,
     body: req.body,
-    id: idCardID
+    id: req.body.id
   })
 
   return res.status(200).send({
@@ -171,12 +168,11 @@ app.post("/api/create_id_card", async function (req, res) {
 app.post("/api/remove_id_card", async function (req, res) {
   console.log("----------Removing ID Card---------------");
 
-  const { idCardID } = req.body;
-
+  console.log(req.body)
   await esClient.delete({
     index: 'blupoint_cards',
     refresh: true,
-    id: idCardID,
+    id: req.body.id,
   });
 
 

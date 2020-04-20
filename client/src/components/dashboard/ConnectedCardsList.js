@@ -26,6 +26,18 @@ export default class ConnectedCardsList extends Component {
                 })
                 console.log(this.state)
             }))
+        const interval = setInterval(() => {
+                axios.get('/api/get_card_locations')
+                    .then(
+                        (response) => {
+    
+                            this.setState({
+                                cardLocations: response.data,
+                                isLoaded: true
+                            })
+                        }
+                    )
+        }, 2000);
     }
 
     render() {

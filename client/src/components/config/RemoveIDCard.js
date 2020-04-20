@@ -14,7 +14,7 @@ export default class AddSensor extends Component {
     handleSubmit() {
 
         axios.post('/api/remove_id_card', {
-            idCardID: this.state.idCardID,
+            id: this.state.id,
         })
             .then(function (response) {
                 console.log(response)
@@ -48,8 +48,8 @@ export default class AddSensor extends Component {
                     <h1 className="title">Remove an ID card</h1>
                     <div className="field">
                         <input
-                            name="idCardID" className="input" type="text" placeholder="Enter ID Card Number"
-                            value={this.state.idCardID}
+                            name="id" className="input" type="text" placeholder="Enter ID Card Number"
+                            value={this.state.id}
                             onChange={this.handleChange}
                         />
                     </div>
